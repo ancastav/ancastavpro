@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { VanguardHero } from "@/components/vanguard/VanguardHero";
 import { DigitalDNA } from "@/components/vanguard/DigitalDNA";
+import { DigitalDNAModules } from "@/components/vanguard/DigitalDNAModules";
 import { AgenticServices } from "@/components/vanguard/AgenticServices";
 import { InteractivePricing } from "@/components/vanguard/InteractivePricing";
 import { TechStack } from "@/components/vanguard/TechStack";
@@ -50,7 +51,7 @@ export default function Home() {
         <div className="hidden lg:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-black">
           <a href="#services" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</a>
           <a href="#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</a>
-          <a href="#diagnostico" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</a>
+          <a href="#diagnostic-lab" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</a>
           
           <div className="flex items-center gap-4 ml-4">
             {/* Language Toggle Button */}
@@ -74,6 +75,9 @@ export default function Home() {
 
       {/* Strategic Pillars */}
       <DigitalDNA lang={lang} />
+
+      {/* Diagnostic Modules Expansion */}
+      <DigitalDNAModules lang={lang} />
 
       {/* Vertical Solutions */}
       <AgenticServices lang={lang} />

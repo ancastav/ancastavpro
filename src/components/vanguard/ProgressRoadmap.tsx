@@ -12,9 +12,9 @@ export const ProgressRoadmap: React.FC<ProgressRoadmapProps> = ({ lang }) => {
     <section className="py-24 px-6 bg-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-poppins font-black text-slate-900 mb-16 text-center uppercase tracking-tighter">
-          {t.title.split(' ').map((word, i) => (
+          {t.title.split(' ').map((word, i, arr) => (
             <React.Fragment key={i}>
-              {i === 1 ? <span className="text-accent-blue">{word} </span> : <span>{word} </span>}
+              {i === arr.length - 1 ? <span className="text-accent-blue">{word} </span> : <span>{word} </span>}
             </React.Fragment>
           ))}
         </h2>

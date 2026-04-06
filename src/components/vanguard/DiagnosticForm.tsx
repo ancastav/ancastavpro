@@ -106,12 +106,9 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ isModalMode = fa
               onChange={e => setFormData({...formData, plan_selected: e.target.value})}
               className="w-full bg-white border border-slate-200 rounded-xl py-3 px-5 text-sm text-slate-900 focus:outline-none focus:border-accent-blue transition-all font-inter appearance-none"
             >
-              <option value="RE">Real Estate</option>
-              <option value="HC">Salud & Clínicas</option>
-              <option value="EC">E-Commerce PRO</option>
-              <option value="RS">Restauración</option>
-              <option value="AC">Academias Digitales</option>
-              <option value="PS">Servicios Profesionales</option>
+              {t.sectors?.map(sector => (
+                <option key={sector.value} value={sector.value}>{sector.label}</option>
+              ))}
             </select>
           </div>
 

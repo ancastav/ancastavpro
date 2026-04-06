@@ -54,7 +54,7 @@ export const VanguardHero: React.FC<VanguardHeroProps> = ({ lang }) => {
       {/* Functional Metadata Detail (Light) */}
       <div className="absolute bottom-12 left-12 hidden lg:block animate-reveal" style={{ animationDelay: '1s' }}>
         <div className="flex flex-col gap-1">
-          <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">System Status</span>
+          <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">{t.system_status}</span>
           <div className="flex items-center gap-2">
             <div className="w-20 h-[2px] bg-slate-100 overflow-hidden">
                 <div className="h-full bg-accent-blue w-2/3 animate-pulse" />
@@ -66,7 +66,7 @@ export const VanguardHero: React.FC<VanguardHeroProps> = ({ lang }) => {
 
       <div className="absolute bottom-12 right-12 hidden lg:block animate-reveal" style={{ animationDelay: '1.2s' }}>
         <div className="text-right">
-          <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest font-bold">Geoposition</span>
+          <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest font-bold">{t.geoposition}</span>
           <p className="text-[10px] font-mono text-slate-500 font-bold tracking-tighter uppercase">Caribbean // DOMINICAN_REPUBLIC // HQ</p>
         </div>
       </div>

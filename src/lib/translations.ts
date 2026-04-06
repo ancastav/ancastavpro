@@ -15,41 +15,167 @@ export const translations = {
       title3: 'Más Clientes.',
       description: 'Diseñamos infraestructuras de última generación para la nueva era de líderes empresariales. Velocidad extrema, diseño impecable y conversión inteligente.',
       cta1: 'Explorar Soluciones',
-      cta2: 'Ver Planes de Inversión'
+      cta2: 'Ver Planes de Inversión',
+      system_status: 'Estado del Sistema',
+      geoposition: 'Geoposición'
     },
     dna: {
       badge: 'Socio Tecnológico Estratégico',
-      title: 'Digital DNA Architecture',
+      title: 'Arquitectura ADN Digital',
       description: 'Fusionamos la ingeniería de software más avanzada con un diseño orientado a resultados, construyendo los cimientos del éxito digital para negocios de élite.',
       pillars: [
         {
           id: 'velocity',
-          label: 'PERFORMANCE',
+          label: 'CORE // RENDIMIENTO',
           title: 'Velocidad de Vanguardia',
           description: 'Arquitectura Next.js que garantiza tiempos de carga instantáneos para maximizar la retención de usuarios.'
         },
         {
           id: 'conversion',
-          label: 'BUSINESS',
+          label: 'CORE // NEGOCIOS',
           title: 'Conversión por Diseño',
           description: 'Estructuras SEO y flujos de usuario optimizados para transformar cada visita en un lead estratégico.'
         },
         {
           id: 'security',
-          label: 'CLOUD',
+          label: 'CORE // NUBE',
           title: 'Seguridad de Élite',
           description: 'Infraestructura en la nube con encriptación avanzada y protección de datos a nivel empresarial.'
         },
         {
           id: 'design',
-          label: 'VANGUARD',
+          label: 'CORE // VANGUARDIA',
           title: 'Identidad Digital',
           description: 'Diseño UX/UI de última generación que eleva el valor percibido de tu marca y genera confianza.'
         }
       ]
     },
+    dna_modules: {
+      badge: 'DIAGNÓSTICO_LAB // ADN_DIGITAL',
+      title: 'Módulos de Arquitectura',
+      subtitle: 'Diseñado para escala de alto rendimiento',
+      items: [
+        { 
+          id: 'WR', 
+          title: 'Web Reality', 
+          description: 'Optimización total en motores de búsqueda y arquitectura de carga instantánea.', 
+          tag: 'PRESENCIA_WEB'
+        },
+        { 
+          id: 'SN', 
+          title: 'Social Nexus', 
+          description: 'Sincronización estratégica de canales digitales para un alcance omnicanal.', 
+          tag: 'REDES_SOCIALES'
+        },
+        { 
+          id: 'TG', 
+          title: 'Trust Guard', 
+          description: 'Sistemas de monitoreo y construcción de autoridad de marca en tiempo real.', 
+          tag: 'REPUTACION_ONLINE'
+        },
+        { 
+          id: 'GS', 
+          title: 'Ventas Globales', 
+          description: 'Ecosistemas de conversión automatizados para maximizar el ROI comercial.', 
+          tag: 'VENTAS_DIGITAL'
+        },
+        { 
+          id: 'AO', 
+          title: 'Operaciones Alpha', 
+          description: 'Flujos de trabajo inteligentes y chatbots de última generación para atención 24/7.', 
+          tag: 'AUTOMATIZACION'
+        }
+      ],
+      quiz: {
+        welcome: {
+          title: '¿Cuál es el ADN Digital de tu Negocio?',
+          subtitle: 'Descubre en 3 minutos las debilidades y fortalezas de tu arquitectura digital actual.',
+          cta: 'INICIAR DIAGNÓSTICO',
+          footer: 'Análisis basado en 15 indicadores clave de rendimiento (KPIs).'
+        },
+        steps: [
+          {
+            module: 'PRESENCIA_WEB',
+            questions: [
+              { id: 'q1', text: '¿Tu sitio web carga en menos de 3 segundos?' },
+              { id: 'q2', text: '¿Está perfectamente optimizado para dispositivos móviles?' },
+              { id: 'q3', text: '¿Aparece en la primera página de Google para tus servicios?' }
+            ]
+          },
+          {
+            module: 'REDES_SOCIALES',
+            questions: [
+              { id: 'q4', text: '¿Publicas contenido de valor al menos 3 veces por semana?' },
+              { id: 'q5', text: '¿Tus perfiles tienen una estética profesional y coherente?' },
+              { id: 'q6', text: '¿Interactúas con tu comunidad en menos de 2 horas?' }
+            ]
+          },
+          {
+            module: 'REPUTACION_ONLINE',
+            questions: [
+              { id: 'q7', text: '¿Tienes más de 20 reseñas positivas en Google My Business?' },
+              { id: 'q8', text: '¿Monitorizas lo que se dice de tu marca en internet?' },
+              { id: 'q9', text: '¿Cuentas con testimonios en video de clientes reales?' }
+            ]
+          },
+          {
+            module: 'VENTAS_DIGITAL',
+            questions: [
+              { id: 'q10', text: '¿Tienes un embudo de ventas (funnel) automatizado?' },
+              { id: 'q11', text: '¿Aceptas pagos en línea de forma segura?' },
+              { id: 'q12', text: '¿Haces remarketing a quienes visitaron tu web?' }
+            ]
+          },
+          {
+            module: 'AUTOMATIZACION',
+            questions: [
+              { id: 'q13', text: '¿Usas un CRM para gestionar tus prospectos?' },
+              { id: 'q14', text: '¿Tienes respuestas automáticas en WhatsApp/Messenger?' },
+              { id: 'q15', text: '¿Tus procesos internos están digitalizados y conectados?' }
+            ]
+          }
+        ],
+        options: [
+          { text: 'Sí, totalmente', value: 100 },
+          { text: 'En proceso', value: 50 },
+          { text: 'No, pero lo necesito', value: 25 },
+          { text: 'No me interesa', value: 0 }
+        ],
+        analysis: {
+          title: 'GENERANDO ADN DIGITAL...',
+          subtitle: 'Procesando indicadores de rendimiento y benchmarks del sector.',
+          steps: [
+            'Escaneando arquitectura web...',
+            'Analizando alcance social...',
+            'Verificando protocolos de confianza...',
+            'Calculando proyecciones de venta...',
+            'Optimizando flujos operativos...'
+          ]
+        },
+        results: {
+          title: 'Resultados del Análisis',
+          cta: 'VER SOLUCIONES ESTRATÉGICAS',
+          score_label: 'Índice de Madurez Digital',
+          levels: {
+            low: {
+              status: 'Nivel Inicial',
+              message: 'Alto Potencial por Desarrollar. Estás perdiendo visibilidad frente a tu competencia. Urge una arquitectura web profesional.'
+            },
+            medium: {
+              status: 'Nivel Intermedio',
+              message: 'Crecimiento en Marcha. Tienes bases sólidas, pero falta automatización para escalar sin límites.'
+            },
+            high: {
+              status: 'Nivel Avanzado',
+              message: 'Presencia Digital Sólida. Tu negocio está a la vanguardia, ahora es momento de optimizar conversiones al máximo.'
+            },
+            restart: 'REINICIAR DIAGNÓSTICO'
+          }
+        }
+      }
+    },
     services: {
-      badge: 'Especialización Sectorial',
+      badge: 'ESPECIALIZACIÓN // SECTORIAL',
       title: 'Soluciones Verticales',
       description: 'Desplegamos inteligencia digital especializada en industrias clave, asegurando que cada línea de código esté optimizada para las demandas únicas de tu mercado.',
       explore: 'Explorar Arquitectura',
@@ -58,37 +184,37 @@ export const translations = {
           id: 'RE', 
           title: 'Inmobiliarias (Real Estate)', 
           description: 'Motores de búsqueda avanzados y sistemas automatizados de emparejamiento de propiedades.', 
-          tag: 'HIGH_CONVERSION'
+          tag: 'ESTADO // ALTA_CONVERSIÓN'
         },
         { 
           id: 'HC', 
           title: 'Clínicas y Salud', 
           description: 'Plataformas de gestión de pacientes con agendamiento integrado y expedientes digitales.', 
-          tag: 'SECURE_DATA'
+          tag: 'ESTADO // DATOS_SEGUROS'
         },
         { 
           id: 'EC', 
           title: 'E-Commerce Avanzado', 
           description: 'Tiendas de última generación con inventario en tiempo real y optimización de checkout.', 
-          tag: 'SCALABLE'
+          tag: 'ESTADO // ESCALABLE'
         },
         { 
           id: 'RS', 
           title: 'Restaurantes y Gastro', 
           description: 'Menú digital dinámico y gestión de reservas para locales de alto tráfico.', 
-          tag: 'MOBILE_FIRST'
+          tag: 'ESTADO // MOBILE_FIRST'
         },
         { 
           id: 'AC', 
           title: 'Academias y LMS', 
           description: 'Entornos de aprendizaje personalizados diseñados para la educación moderna a distancia.', 
-          tag: 'INTERACTIVE'
+          tag: 'ESTADO // INTERACTIVO'
         },
         { 
           id: 'PS', 
           title: 'Servicios Profesionales', 
           description: 'Herramientas administrativas a medida para bufetes, contabilidad y consultoría.', 
-          tag: 'EFFICIENCY'
+          tag: 'ESTADO // EFICIENCIA'
         }
       ]
     },
@@ -163,14 +289,14 @@ export const translations = {
     },
     techstack: {
       title: 'Arquitectura de Vanguardia',
-      status: 'CORE_SYSTEM_NODES: RUNNING_STABLE',
+      status: 'NODOS_SISTEMA_CORE: EJECUCIÓN_ESTABLE',
       technologies: [
        { name: 'Next.js', category: 'FRAMEWORK', icon: '⚡', description: 'La arquitectura React definitiva para velocidad y SSR.' },
-       { name: 'TypeScript', category: 'ENCRYPTION', icon: '🛡️', description: 'Código robusto y libre de errores para mayor seguridad.' },
-       { name: 'Tailwind CSS', category: 'DESIGN', icon: '🎨', description: 'Estilos ultra-rápidos con una estética moderna y limpia.' },
-       { name: 'Firebase', category: 'DATABASE', icon: '🔥', description: 'Base de datos en tiempo real para interacción instantánea.' },
-       { name: 'Google Cloud', category: 'INFRA', icon: '☁️', description: 'Despliegues escalables con 99.9% de tiempo de actividad.' },
-       { name: 'AI Integration', category: 'GENERIC', icon: '🧠', description: 'Automatización inteligente para captación de leads.' }
+       { name: 'TypeScript', category: 'ENCRIPTACIÓN', icon: '🛡️', description: 'Código robusto y libre de errores para mayor seguridad.' },
+       { name: 'Tailwind CSS', category: 'DISEÑO', icon: '🎨', description: 'Estilos ultra-rápidos con una estética moderna y limpia.' },
+       { name: 'Firebase', category: 'BASE_DE_DATOS', icon: '🔥', description: 'Base de datos en tiempo real para interacción instantánea.' },
+       { name: 'Google Cloud', category: 'INFRAESTRUCTURA', icon: '☁️', description: 'Despliegues escalables con 99.9% de tiempo de actividad.' },
+       { name: 'Integración IA', category: 'GENERICO', icon: '🧠', description: 'Automatización inteligente para captación de leads.' }
       ]
     },
     footer: {
@@ -193,7 +319,7 @@ export const translations = {
         terms: 'Términos de Servicio',
         cookies: 'Cookies'
       },
-      rights: 'All Rights Reserved.',
+      rights: 'Todos los derechos reservados.',
       powered: 'Desarrollado por Inteligencia de Vanguardia'
     },
     diagnostic: {
@@ -217,7 +343,15 @@ export const translations = {
       submit: 'Enviar Solicitud',
       successTitle: 'Solicitud Recibida',
       successMessage: 'Un consultor de Ancastav Digital Services lo contactará en menos de 24 horas.',
-      errorMessage: 'Ocurrió un error. Verifique su conexión e intente de nuevo.'
+      errorMessage: 'Ocurrió un error. Verifique su conexión e intente de nuevo.',
+      sectors: [
+        { value: 'RE', label: 'Bienes Raíces' },
+        { value: 'HC', label: 'Salud & Clínicas' },
+        { value: 'EC', label: 'E-Commerce PRO' },
+        { value: 'RS', label: 'Restauración' },
+        { value: 'AC', label: 'Academias Digitales' },
+        { value: 'PS', label: 'Servicios Profesionales' },
+      ]
     }
   },
   en: {
@@ -234,7 +368,9 @@ export const translations = {
       title3: 'More Clients.',
       description: 'We design next-generation infrastructures for the new era of business leaders. Extreme speed, impeccable design, and intelligent conversion.',
       cta1: 'Explore Solutions',
-      cta2: 'View Investment Plans'
+      cta2: 'View Investment Plans',
+      system_status: 'System Status',
+      geoposition: 'Geoposition'
     },
     dna: {
       badge: 'Strategic Technology Partner',
@@ -243,32 +379,156 @@ export const translations = {
       pillars: [
         {
           id: 'velocity',
-          label: 'PERFORMANCE',
+          label: 'CORE // PERFORMANCE',
           title: 'Vanguard Velocity',
           description: 'Next.js architecture ensuring instant load times to maximize user retention.'
         },
         {
           id: 'conversion',
-          label: 'BUSINESS',
+          label: 'CORE // BUSINESS',
           title: 'Conversion by Design',
           description: 'SEO structures and user flows optimized to transform every visit into a strategic lead.'
         },
         {
           id: 'security',
-          label: 'CLOUD',
+          label: 'CORE // CLOUD',
           title: 'Elite Security',
           description: 'Cloud infrastructure with advanced encryption and enterprise-level data protection.'
         },
         {
           id: 'design',
-          label: 'VANGUARD',
+          label: 'CORE // VANGUARD',
           title: 'Digital Identity',
           description: 'Next-generation UX/UI design that elevates your brand\'s perceived value and builds trust.'
         }
       ]
     },
+    dna_modules: {
+      badge: 'DIAGNOSTIC_LAB // DIGITAL_DNA',
+      title: 'Architecture Modules',
+      subtitle: 'Engineered for high-performance scale',
+      items: [
+        { 
+          id: 'WR', 
+          title: 'Web Reality', 
+          description: 'Total search engine optimization and instant-load architecture.', 
+          tag: 'WEB_PRESENCE'
+        },
+        { 
+          id: 'SN', 
+          title: 'Social Nexus', 
+          description: 'Strategic synchronization of digital channels for omnichannel reach.', 
+          tag: 'SOCIAL_NETWORKS'
+        },
+        { 
+          id: 'TG', 
+          title: 'Trust Guard', 
+          description: 'Real-time monitoring and brand authority building systems.', 
+          tag: 'ONLINE_REPUTATION'
+        },
+        { 
+          id: 'GS', 
+          title: 'Global Sales', 
+          description: 'Automated conversion ecosystems to maximize commercial ROI.', 
+          tag: 'DIGITAL_SALES'
+        },
+        { 
+          id: 'AO', 
+          title: 'Alpha Ops', 
+          description: 'Intelligent workflows and next-gen chatbots for 24/7 care.', 
+          tag: 'AUTOMATION'
+        }
+      ],
+      quiz: {
+        welcome: {
+          title: "What is your Business's Digital DNA?",
+          subtitle: "Discover the weaknesses and strengths of your current digital architecture in 3 minutes.",
+          cta: "START DIAGNOSTIC",
+          footer: "Analysis based on 15 key performance indicators (KPIs)."
+        },
+        steps: [
+          {
+            module: 'WEB_PRESENCE',
+            questions: [
+              { id: 'q1', text: 'Does your website load in less than 3 seconds?' },
+              { id: 'q2', text: 'Is it perfectly optimized for mobile devices?' },
+              { id: 'q3', text: 'Does it appear on the first page of Google for your services?' }
+            ]
+          },
+          {
+            module: 'SOCIAL_NETWORKS',
+            questions: [
+              { id: 'q4', text: 'Do you publish value-driven content at least 3 times a week?' },
+              { id: 'q5', text: 'Do your profiles have a professional and consistent aesthetic?' },
+              { id: 'q6', text: 'Do you interact with your community in less than 2 hours?' }
+            ]
+          },
+          {
+            module: 'ONLINE_REPUTATION',
+            questions: [
+              { id: 'q7', text: 'Do you have more than 20 positive reviews on Google My Business?' },
+              { id: 'q8', text: 'Do you monitor what is said about your brand on the internet?' },
+              { id: 'q9', text: 'Do you have video testimonials from real clients?' }
+            ]
+          },
+          {
+            module: 'DIGITAL_SALES',
+            questions: [
+              { id: 'q10', text: 'Do you have an automated sales funnel?' },
+              { id: 'q11', text: 'Do you accept online payments securely?' },
+              { id: 'q12', text: 'Do you remarket to those who visited your website?' }
+            ]
+          },
+          {
+            module: 'AUTOMATION',
+            questions: [
+              { id: 'q13', text: 'Do you use a CRM to manage your prospects?' },
+              { id: 'q14', text: 'Do you have automatic replies on WhatsApp/Messenger?' },
+              { id: 'q15', text: 'Are your internal processes digitized and connected?' }
+            ]
+          }
+        ],
+        options: [
+          { text: 'Yes, totally', value: 100 },
+          { text: 'In progress', value: 50 },
+          { text: 'No, but I need it', value: 25 },
+          { text: 'Not interested', value: 0 }
+        ],
+        analysis: {
+          title: 'GENERATING DIGITAL DNA...',
+          subtitle: 'Processing performance indicators and sector benchmarks.',
+          steps: [
+            'Scanning web architecture...',
+            'Analyzing social reach...',
+            'Verifying trust protocols...',
+            'Calculating sales projections...',
+            'Optimizing operational flows...'
+          ]
+        },
+        results: {
+          title: 'YOUR DNA RESULT',
+          cta: 'VIEW STRATEGIC SOLUTIONS',
+          score_label: 'Digital Maturity Index',
+          levels: {
+            low: {
+              status: 'Initial Level',
+              message: 'High Potential to Develop. You are losing visibility to your competition. A professional web architecture is urgent.'
+            },
+            medium: {
+              status: 'Intermediate Level',
+              message: 'Growth in Progress. You have solid foundations, but lack automation to scale without limits.'
+            },
+            high: {
+              status: 'Advanced Level',
+              message: 'Solid Digital Presence. Your business is at the forefront, now is the time to optimize conversions to the maximum.'
+            },
+            restart: 'RESTART DIAGNOSTIC'
+          }
+        }
+      }
+    },
     services: {
-      badge: 'Sector Specialization',
+      badge: 'SPECIALIZATION // SECTORIAL',
       title: 'Vertical Solutions',
       description: 'We deploy specialized digital intelligence in key industries, ensuring every line of code is optimized for your market\'s unique demands.',
       explore: 'Explore Architecture',
@@ -277,37 +537,37 @@ export const translations = {
           id: 'RE', 
           title: 'Real Estate', 
           description: 'Advanced search engines and automated property matching systems.', 
-          tag: 'HIGH_CONVERSION'
+          tag: 'STATUS // HIGH_CONVERSION'
         },
         { 
           id: 'HC', 
           title: 'Clinics & Healthcare', 
           description: 'Patient management platforms with integrated scheduling and digital records.', 
-          tag: 'SECURE_DATA'
+          tag: 'STATUS // SECURE_DATA'
         },
         { 
           id: 'EC', 
           title: 'Advanced E-Commerce', 
           description: 'Next-gen stores with real-time inventory and checkout optimization.', 
-          tag: 'SCALABLE'
+          tag: 'STATUS // SCALABLE'
         },
         { 
           id: 'RS', 
           title: 'Restaurants & F&B', 
           description: 'Dynamic digital menus and booking management for high-traffic venues.', 
-          tag: 'MOBILE_FIRST'
+          tag: 'STATUS // MOBILE_FIRST'
         },
         { 
           id: 'AC', 
           title: 'Academies & LMS', 
           description: 'Custom learning environments designed for modern distance education.', 
-          tag: 'INTERACTIVE'
+          tag: 'STATUS // INTERACTIVE'
         },
         { 
           id: 'PS', 
           title: 'Professional Services', 
           description: 'Tailored administrative tools for law firms, accounting, and consulting.', 
-          tag: 'EFFICIENCY'
+          tag: 'STATUS // EFFICIENCY'
         }
       ]
     },
@@ -436,7 +696,15 @@ export const translations = {
       submit: 'Send Request',
       successTitle: 'Request Received',
       successMessage: 'An Ancastav Digital Services consultant will contact you in less than 24 hours.',
-      errorMessage: 'An error occurred. Please check your connection and try again.'
+      errorMessage: 'An error occurred. Please check your connection and try again.',
+      sectors: [
+        { value: 'RE', label: 'Real Estate' },
+        { value: 'HC', label: 'Health & Clinics' },
+        { value: 'EC', label: 'E-Commerce PRO' },
+        { value: 'RS', label: 'Restoration' },
+        { value: 'AC', label: 'Digital Academies' },
+        { value: 'PS', label: 'Professional Services' },
+      ]
     }
   }
 };

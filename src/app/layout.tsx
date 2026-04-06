@@ -26,6 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-poppins bg-white text-slate-900">{children}</body>

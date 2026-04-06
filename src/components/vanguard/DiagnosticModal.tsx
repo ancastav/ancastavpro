@@ -10,10 +10,21 @@ interface DiagnosticModalProps {
 
 export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isQuizActive = React.useRef(false);
 
   useEffect(() => {
+    // Listener for quiz state
+    const handleQuizState = (e: any) => {
+      isQuizActive.current = e.detail.active;
+      if (isQuizActive.current) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('diagnostic-active', handleQuizState);
+
     // 1. Initial delay trigger
     const timer = setTimeout(() => {
+      if (isQuizActive.current) return;
       const shown = sessionStorage.getItem('ancastav_diagnostic_modal_seen');
       if (!shown) {
         setIsOpen(true);
@@ -27,7 +38,7 @@ export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
 
     // 3. Exit intent trigger
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
+      if (e.clientY <= 0 && !isQuizActive.current) {
         const shown = sessionStorage.getItem('ancastav_diagnostic_modal_seen');
         if (!shown) {
           setIsOpen(true);
@@ -39,6 +50,7 @@ export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('diagnostic-active', handleQuizState);
       window.removeEventListener('open-diagnostic', handleOpen);
       window.removeEventListener('mouseleave', handleMouseLeave);
     };

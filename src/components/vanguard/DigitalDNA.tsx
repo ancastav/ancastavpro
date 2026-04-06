@@ -43,7 +43,7 @@ export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang }) => {
             {t.badge}
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
-            Digital <span className="text-accent-blue">DNA</span> Architecture
+            {t.title.split(' ')[0]} <span className="text-accent-blue">{t.title.split(' ')[1]}</span> {t.title.split(' ')[2]}
           </h2>
           <p className="text-slate-500 text-lg max-w-3xl mx-auto">
             {t.description}
