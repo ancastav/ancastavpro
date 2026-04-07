@@ -10,6 +10,7 @@ interface DiagnosticModalProps {
 
 export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [flow, setFlow] = useState<'contact' | 'diagnostic'>('contact');
   const isQuizActive = React.useRef(false);
 
   useEffect(() => {
@@ -22,25 +23,27 @@ export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
     };
     window.addEventListener('diagnostic-active', handleQuizState);
 
-    // 1. Initial delay trigger
-    const timer = setTimeout(() => {
-      if (isQuizActive.current) return;
-      const shown = sessionStorage.getItem('ancastav_diagnostic_modal_seen');
-      if (!shown) {
-        setIsOpen(true);
-        sessionStorage.setItem('ancastav_diagnostic_modal_seen', 'true');
-      }
-    }, 60000); // 1 minute
+    // 1. Global event listener triggers
+    const handleOpenContact = () => {
+      setFlow('contact');
+      setIsOpen(true);
+    };
+    
+    const handleOpenDiagnostic = () => {
+      setFlow('diagnostic');
+      setIsOpen(true);
+    };
 
-    // 2. Global event listener trigger
-    const handleOpen = () => setIsOpen(true);
-    window.addEventListener('open-diagnostic', handleOpen);
+    window.addEventListener('open-contact', handleOpenContact);
+    window.addEventListener('open-diagnostic', handleOpenDiagnostic);
 
-    // 3. Exit intent trigger
+    // 2. Exit intent trigger
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !isQuizActive.current) {
+      // Trigger if mouse leaves toward the top (URL bar area) or loses focus completely
+      if ((e.clientY <= 5 || !e.relatedTarget) && !isQuizActive.current) {
         const shown = sessionStorage.getItem('ancastav_diagnostic_modal_seen');
         if (!shown) {
+          setFlow('contact'); // Default exit intent to contact-only
           setIsOpen(true);
           sessionStorage.setItem('ancastav_diagnostic_modal_seen', 'true');
         }
@@ -49,9 +52,9 @@ export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
     window.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('diagnostic-active', handleQuizState);
-      window.removeEventListener('open-diagnostic', handleOpen);
+      window.removeEventListener('open-contact', handleOpenContact);
+      window.removeEventListener('open-diagnostic', handleOpenDiagnostic);
       window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
@@ -78,7 +81,7 @@ export const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ lang }) => {
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto custom-scrollbar p-0">
-          <DiagnosticForm isModalMode={true} lang={lang} />
+          <DiagnosticForm isModalMode={true} lang={lang} flow={flow} />
         </div>
       </div>
     </div>

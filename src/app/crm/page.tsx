@@ -46,13 +46,27 @@ export default function CRMDashboard() {
     try {
       const leadsRes = await fetch('/api/leads');
       const leadsData = await leadsRes.json();
-      setLeads(leadsData);
+      
+      if (Array.isArray(leadsData)) {
+        setLeads(leadsData);
+      } else {
+        console.error("Leads API error:", leadsData.error || "Unknown error");
+        setLeads([]);
+      }
       
       const apptRes = await fetch('/api/appointments');
       const apptData = await apptRes.json();
-      setAppointments(apptData);
+      
+      if (Array.isArray(apptData)) {
+        setAppointments(apptData);
+      } else {
+        console.error("Appointments API error:", apptData.error || "Unknown error");
+        setAppointments([]);
+      }
     } catch (e) {
       console.error("Error fetching data:", e);
+      setLeads([]);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }

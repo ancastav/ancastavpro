@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import SecurityShield from "@/components/vanguard/SecurityShield";
+import GoogleAnalytics from "@/components/vanguard/GoogleAnalytics";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,8 +17,27 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "ancastav Digital Services | Vanguard Digital Platform",
-  description: "Next-generation digital solutions for strategic growth. Web development, AI integration, and brand scaling.",
+  title: "Diseño Web Profesional en República Dominicana | ANCASTAV",
+  description: "Diseño web profesional para MiPyMEs en Puerto Plata y toda República Dominicana. Creamos tu página web desde $249. Inmobiliarias, clínicas, negocios locales y más. ¡Cotiza gratis hoy!",
+  keywords: "diseño web, puerto plata, república dominicana, mipymes, inmobiliarias, clínicas, seo, marketing digital, ancastav",
+  authors: [{ name: "ANCASTAV" }],
+  openGraph: {
+    title: "Diseño Web Profesional en República Dominicana | ANCASTAV",
+    description: "Diseño web profesional para MiPyMEs en Puerto Plata y toda República Dominicana. Creamos tu página web desde $249.",
+    url: "https://ancastav.com",
+    siteName: "ANCASTAV",
+    locale: "es_DO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Diseño Web Profesional en República Dominicana | ANCASTAV",
+    description: "Diseño web profesional para MiPyMEs en Puerto Plata y toda República Dominicana.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -25,11 +47,29 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       suppressHydrationWarning
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-poppins bg-white text-slate-900">{children}</body>
+      <head>
+        <meta name="impact-site-verification" {...({ value: "-398674695" } as any)} />
+        {/* Google Analytics - Direct Head Injection for Verification */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J82GSK0CNB" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J82GSK0CNB');
+          `
+        }} />
+      </head>
+      <body className="min-h-full flex flex-col font-poppins bg-white text-slate-900">
+        <LanguageProvider>
+          <SecurityShield />
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }

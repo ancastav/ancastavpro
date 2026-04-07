@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { translations, Language } from "@/lib/translations";
+import { getTrackingCode } from '@/lib/utils';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -25,12 +26,17 @@ type Screen = 'welcome' | 'quiz' | 'analysis' | 'results';
 export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({ lang }) => {
   const t = translations[lang].dna_modules.quiz;
   const [screen, setScreen] = useState<Screen>('welcome');
+  const [mounted, setMounted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [answers, setAnswers] = useState<number[]>([]);
   const [analysisStep, setAnalysisStep] = useState(0);
   const [score, setScore] = useState(0);
+  const [isReporting, setIsReporting] = useState(false);
+  const [reportStatus, setReportStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [trackingCode, setTrackingCode] = useState<string>('');
+  const [leadData, setLeadData] = useState<any>(null);
   const analysisIntervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const defaultOptions = translations[lang].dna_modules.quiz.options;
@@ -46,6 +52,22 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
     setScreen('quiz');
     window.dispatchEvent(new CustomEvent('diagnostic-active', { detail: { active: true } }));
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleStartWithLead = (e: any) => {
+      setLeadData(e.detail);
+      startQuiz();
+      // Scroll to this component
+      const el = document.getElementById('diagnostic-lab');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+    window.addEventListener('start-diagnostic-with-lead', handleStartWithLead);
+    return () => window.removeEventListener('start-diagnostic-with-lead', handleStartWithLead);
+  }, []);
 
   const handleAnswer = (value: number, idx: number) => {
     if (isTransitioning) return;
@@ -63,6 +85,8 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
       if (currentQuestionIndex < allQuestions.length - 1) {
         setCurrentQuestionIndex(prev => prev + 1);
       } else {
+        const code = getTrackingCode();
+        setTrackingCode(code);
         calculateAndAnalyze(newAnswers);
       }
     }, 500);
@@ -108,7 +132,49 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
     setCurrentQuestionIndex(0);
     setAnalysisStep(0);
     setScore(0);
+    setReportStatus('idle');
     window.dispatchEvent(new CustomEvent('diagnostic-active', { detail: { active: false } }));
+  };
+
+  const sendReport = async (codeToUse: string) => {
+    if (reportStatus !== 'idle') return;
+    
+    setReportStatus('sending');
+    try {
+      const response = await fetch('/api/diagnostic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          score,
+          level: getResultLevel(),
+          answers,
+          lang,
+          trackingCode: codeToUse,
+          leadData
+        })
+      });
+
+      if (response.ok) {
+        setReportStatus('success');
+      } else {
+        setReportStatus('error');
+      }
+    } catch (error) {
+      setReportStatus('error');
+    }
+  };
+
+  useEffect(() => {
+    if (screen === 'results' && reportStatus === 'idle' && trackingCode) {
+      sendReport(trackingCode);
+    }
+  }, [screen, trackingCode]);
+
+  const getRecommendedPlan = () => {
+    const pt = translations[lang].investment;
+    if (score <= 40) return { name: pt.plans.alpha, desc: pt.descriptions.alpha, icon: <Shield className="text-blue-500" /> };
+    if (score <= 80) return { name: pt.plans.sigma, desc: pt.descriptions.sigma, icon: <Zap className="text-amber-500" />, featured: true };
+    return { name: pt.plans.delta, desc: pt.descriptions.delta, icon: <Trophy className="text-accent-blue" /> };
   };
 
   const getResultLevel = () => {
@@ -126,16 +192,29 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
     </div>
   );
 
+  if (!mounted) {
+    return (
+      <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-8 md:p-16 text-center animate-pulse min-h-[400px] flex flex-col items-center justify-center">
+        <div className="w-20 h-20 bg-slate-800 rounded-2xl mx-auto mb-8" />
+        <div className="h-8 w-64 bg-slate-800 rounded-lg mx-auto mb-4" />
+        <div className="h-4 w-48 bg-slate-800 rounded-lg mx-auto" />
+      </div>
+    );
+  }
+
   if (screen === 'welcome') {
     return (
-      <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 md:p-16 text-center animate-reveal">
-        <div className="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8 text-accent-blue">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-16 text-center animate-reveal relative overflow-hidden group">
+        {/* Glow effect */}
+        <div className="absolute -top-24 -left-24 w-48 h-48 bg-accent-blue/10 blur-[100px] group-hover:bg-accent-blue/20 transition-all duration-700" />
+        
+        <div className="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8 text-accent-blue border border-blue-500/20">
           <BarChart3 size={40} />
         </div>
-        <h4 className="text-4xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
+        <h4 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">
           {t.welcome.title}
         </h4>
-        <p className="text-slate-500 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-slate-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
           {t.welcome.subtitle}
         </p>
         <button 
@@ -152,19 +231,19 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
   if (screen === 'quiz') {
     const question = allQuestions[currentQuestionIndex];
     return (
-      <div className="bg-white border border-slate-100 rounded-3xl p-8 md:p-12 shadow-xl shadow-slate-200/50 animate-reveal">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/50 animate-reveal">
         <div className="flex items-center justify-between mb-8">
-          <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+          <span className="px-3 py-1 bg-slate-800 rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-widest border border-slate-700/50">
             {question.module}
           </span>
-          <span className="text-sm font-mono text-slate-400">
+          <span className="text-sm font-mono text-slate-500">
             {currentQuestionIndex + 1} / {allQuestions.length}
           </span>
         </div>
         
         <ProgressBar />
 
-        <h4 className="text-2xl font-bold text-slate-900 mb-10 min-h-[3.5rem]">
+        <h4 className="text-2xl font-bold text-white mb-10 min-h-[3.5rem]">
           {question.text}
         </h4>
 
@@ -178,17 +257,17 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
                 onClick={() => handleAnswer(opt.value, idx)}
                 className={`group flex items-center justify-between p-5 border rounded-2xl text-left transition-all duration-300 
                   ${isSelected 
-                    ? 'border-accent-blue bg-blue-50 shadow-md transform scale-[1.02] z-10' 
-                    : 'border-slate-100 bg-white hover:border-accent-blue/50 hover:bg-slate-50'
+                    ? 'border-accent-blue bg-accent-blue/10 shadow-lg transform scale-[1.02] z-10' 
+                    : 'border-slate-800 bg-slate-800/20 hover:border-accent-blue/50 hover:bg-slate-800/40'
                   } ${isTransitioning && !isSelected ? 'opacity-40 grayscale-[0.5]' : 'opacity-100'}`}
               >
-                <span className={`font-medium transition-colors ${isSelected ? 'text-slate-900' : 'text-slate-700 group-hover:text-slate-900'}`}>
+                <span className={`font-medium transition-colors ${isSelected ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
                   {opt.text}
                 </span>
                 <div className={`w-6 h-6 border-2 rounded-full flex items-center justify-center transition-all duration-300 
                   ${isSelected 
                     ? 'border-accent-blue bg-accent-blue shadow-inner' 
-                    : 'border-slate-200 group-hover:border-accent-blue group-hover:bg-accent-blue/10'
+                    : 'border-slate-700 group-hover:border-accent-blue group-hover:bg-accent-blue/20'
                   }`}
                 >
                   <CheckCircle2 
@@ -229,8 +308,8 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
   if (screen === 'results') {
     const level = getResultLevel();
     return (
-      <div className="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/5 animate-reveal">
-        <div className="bg-slate-900 p-12 text-center text-white relative">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl shadow-black/80 animate-reveal">
+        <div className="bg-black p-12 text-center text-white relative border-b border-slate-800">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 border border-white/10 rounded-full text-accent-blue text-xs font-bold uppercase tracking-widest mb-6">
               <Trophy size={14} />
@@ -242,13 +321,19 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
             <p className="text-slate-400 font-medium uppercase tracking-widest text-sm">
               {t.results.score_label}
             </p>
+            {trackingCode && (
+              <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-md">
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">ID SEGUIMIENTO:</span>
+                <span className="text-[10px] font-mono text-accent-blue font-bold tracking-tighter uppercase">{trackingCode}</span>
+              </div>
+            )}
           </div>
           
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-900 to-transparent" />
         </div>
 
         <div className="p-12 md:p-16 text-center">
-          <p className="text-xl text-slate-700 font-medium leading-relaxed mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 font-medium leading-relaxed mb-12 max-w-2xl mx-auto">
             "{level.message}"
           </p>
 
@@ -258,18 +343,73 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
               { icon: <TrendingUp size={24} />, label: "Scalability", value: score > 50 ? "High" : "Mid" },
               { icon: <Award size={24} />, label: "Maturity", value: level.status }
             ].map((stat, i) => (
-              <div key={i} className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+              <div key={i} className="p-6 bg-slate-800/40 rounded-2xl border border-slate-800 hover:border-accent-blue/30 transition-colors">
                 <div className="text-accent-blue mb-3 flex justify-center">{stat.icon}</div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">{stat.label}</div>
-                <div className="text-slate-900 font-black">{stat.value}</div>
+                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">{stat.label}</div>
+                <div className="text-white font-black">{stat.value}</div>
               </div>
             ))}
+          </div>
+
+          {/* Recommended Plan Section */}
+          <div className="mb-12 p-8 bg-blue-500/5 border border-blue-500/10 rounded-3xl text-left animate-reveal">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center shadow-sm border border-slate-700">
+                <Target className="text-accent-blue" size={20} />
+              </div>
+              <div>
+                <h5 className="text-xs font-black text-accent-blue uppercase tracking-widest">{t.results.recommendation_title}</h5>
+                <p className="text-white font-bold text-lg">{getRecommendedPlan().name}</p>
+              </div>
+            </div>
+            
+            <div className="bg-slate-800/40 p-6 rounded-2xl border border-blue-500/10 shadow-sm mb-4">
+              <div className="flex items-start gap-4">
+                <div className="mt-1">{getRecommendedPlan().icon}</div>
+                <div>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                    {getRecommendedPlan().desc}
+                  </p>
+                  <div className="inline-flex items-center gap-2 text-[10px] font-black text-accent-blue uppercase tracking-widest px-3 py-1 bg-accent-blue/10 rounded-full border border-accent-blue/20">
+                    <CheckCircle2 size={12} />
+                    {t.results.recommendation_why}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* API Status Indicator */}
+            <div className="flex items-center gap-2 px-1">
+              {reportStatus === 'sending' && (
+                <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+                  <Loader2 size={12} className="animate-spin" />
+                  {t.results.sending_report}
+                </div>
+              )}
+              {reportStatus === 'success' && (
+                <div className="flex items-center gap-2 text-green-500 text-[10px] font-bold uppercase tracking-widest">
+                  <CheckCircle2 size={12} />
+                  {t.results.report_sent}
+                </div>
+              )}
+              {reportStatus === 'error' && (
+                <div className="flex items-center gap-2 text-red-500 text-[10px] font-bold uppercase tracking-widest">
+                   {t.results.report_error}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-col gap-4">
             <a 
               href={`https://wa.me/18092329476?text=${encodeURIComponent(
-                `Hola! Acabo de completar el Diagnóstico ADN Digital.\n\n*Resultado:* ${level.status}\n*Puntaje:* ${score}%\n\nMe gustaría conocer más sobre las soluciones estratégicas de Ancastav.`
+                `📊 *REPORTE DE DIAGNÓSTICO ADN DIGITAL*\n\n` +
+                `*Cliente:* ${leadData?.full_name || 'Nuevo Prospecto'}\n` +
+                `*Nivel:* ${level.status}\n` +
+                `*Puntaje:* ${score}%\n` +
+                `*Plan Sugerido:* ${getRecommendedPlan().name}\n\n` +
+                `Hola! Soy ${leadData?.full_name || ''}. He completado mi diagnóstico y me gustaría conocer más sobre las soluciones estratégicas de Ancastav.\n\n` +
+                `*ID Seguimiento:* ${trackingCode}`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -281,7 +421,7 @@ export const InteractiveADNDiagnostic: React.FC<InteractiveDiagnosticProps> = ({
             </a>
             <button 
               onClick={restart}
-              className="w-full py-4 border border-slate-200 text-slate-500 rounded-2xl font-bold uppercase tracking-widest text-center hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 border border-slate-800 text-slate-500 rounded-2xl font-bold uppercase tracking-widest text-center hover:bg-slate-800 hover:text-slate-300 transition-all flex items-center justify-center gap-2"
             >
               <RotateCcw size={16} />
               {/* @ts-ignore */}

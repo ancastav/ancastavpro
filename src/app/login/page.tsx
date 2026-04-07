@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, Mail, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -24,7 +25,7 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        router.push('/crm');
+        router.push('/admin/dashboard');
       } else {
         setError('Acceso denegado: Credenciales incorrectas');
       }
@@ -42,7 +43,15 @@ export default function LoginPage() {
       <div className="absolute w-[600px] h-[600px] border border-white/[0.03] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="w-full max-w-md relative z-10">
-        <div className="mb-10 text-center">
+        <div className="mb-10 text-center flex flex-col items-center">
+            <Image 
+              src="/AncastavLogo.svg" 
+              alt="ANCASTAV" 
+              width={64} 
+              height={64} 
+              className="mb-6 object-contain"
+              priority
+            />
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase mb-4 tracking-tighter">
                 <Lock size={12} /> Zona Restringida
             </div>

@@ -1,11 +1,17 @@
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { getSql } from './db';
+
+interface SessionPayload extends JWTPayload {
+  user: { email: string; id: string };
+  expires: Date;
+}
 
 const secretKey = "vanguardia_ancastav_secret_key_change_me_in_prod";
 const key = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: any) {
+export async function encrypt(payload: JWTPayload) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -13,21 +19,29 @@ export async function encrypt(payload: any) {
     .sign(key);
 }
 
-export async function decrypt(input: string): Promise<any> {
+export async function decrypt(input: string): Promise<SessionPayload> {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ['HS256'],
   });
-  return payload;
+  return payload as SessionPayload;
 }
 
 export async function login(formData: FormData) {
-  // Configuración de usuario solicitada por el usuario (Ancastav)
-  const user = { email: "admin@ancastav.com", id: "1" };
-  const password = "password123"; // El usuario debería cambiarla después
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
-  if (formData.get("password") !== password || formData.get("email") !== user.email) {
-    return null;
-  }
+  const sql = getSql();
+  if (!sql) return null;
+
+  const userRes = await sql`
+    SELECT id, email, name FROM admin_users 
+    WHERE email = ${email} AND password = ${password}
+    LIMIT 1
+  `;
+
+  if (userRes.length === 0) return null;
+  
+  const user = userRes[0];
 
   // Crear la sesión
   const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 horas
@@ -35,7 +49,13 @@ export async function login(formData: FormData) {
 
   // Guardar en cookies
   const cookieStore = await cookies();
-  cookieStore.set("session", session, { expires, httpOnly: true });
+  cookieStore.set("session", session, { 
+    expires, 
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/'
+  });
   
   return user;
 }

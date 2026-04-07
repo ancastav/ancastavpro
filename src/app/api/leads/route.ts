@@ -1,6 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { NextRequest, NextResponse } from 'next/server';
-import { sendLeadNotification } from '@/lib/mail';
+import { sendLeadNotification, type Lead } from '@/lib/mail';
 
 const getSql = () => {
   const url = process.env.DATABASE_URL;
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     `;
 
     // Fase 3: Notificar por email (Simulado en consola por ahora)
-    await sendLeadNotification(result[0]);
+    await sendLeadNotification(result[0] as Lead);
 
     return NextResponse.json({ success: true, lead: result[0] });
   } catch (error: any) {

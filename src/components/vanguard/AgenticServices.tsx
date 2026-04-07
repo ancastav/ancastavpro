@@ -40,7 +40,7 @@ export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
           {t.items.map((service, index) => (
             <div 
               key={index}
-              onClick={() => window.dispatchEvent(new CustomEvent('open-diagnostic'))}
+              onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
               className="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-accent-blue/20 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 cursor-pointer animate-reveal overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >

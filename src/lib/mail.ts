@@ -2,7 +2,16 @@ import { Resend } from 'resend';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-export async function sendLeadNotification(lead: any) {
+export interface Lead {
+  full_name: string;
+  plan_selected: string;
+  company?: string;
+  email: string;
+  phone: string;
+  message?: string;
+}
+
+export async function sendLeadNotification(lead: Lead) {
   const recipients = [
     'me@ancastav.com',
     'aacasilla@ancastav.com',

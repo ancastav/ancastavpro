@@ -5,6 +5,7 @@ export const translations = {
     nav: {
       solutions: 'Soluciones',
       pricing: 'Inversión',
+      blog: 'Insights',
       diagnostic: 'Diagnóstico Lab',
       portal: 'Portal Clientes'
     },
@@ -170,9 +171,21 @@ export const translations = {
               message: 'Presencia Digital Sólida. Tu negocio está a la vanguardia, ahora es momento de optimizar conversiones al máximo.'
             },
             restart: 'REINICIAR DIAGNÓSTICO'
-          }
+          },
+          recommendation_title: 'Plan Recomendado',
+          recommendation_why: '¿Por qué este plan?',
+          sending_report: 'Enviando Plan de Acción...',
+          report_sent: '¡Plan de Acción enviado a Ancastav!',
+          report_error: 'Error al enviar reporte.'
         }
       }
+    },
+    seo: {
+      title: 'ancastav | Arquitectura Digital de Vanguardia',
+      description: 'Expertos en transformación digital. Diseño de sitios web, SEO estratégico e inteligencia artificial para negocios de élite.',
+      keywords: 'diseño web, next.js, seo, inteligencia artificial, transformación digital, ancastav, optimización web',
+      og_title: 'ancastav - Socio Tecnológico Estratégico',
+      og_description: 'Construimos el ADN digital de tu negocio con tecnología de última generación.'
     },
     services: {
       badge: 'ESPECIALIZACIÓN // SECTORIAL',
@@ -352,6 +365,22 @@ export const translations = {
         { value: 'AC', label: 'Academias Digitales' },
         { value: 'PS', label: 'Servicios Profesionales' },
       ]
+    },
+    blog: {
+      badge: 'ARTÍCULOS // NODOS_MUNDO',
+      title: 'Vanguard Insights',
+      description: 'Análisis de última milla sobre las tecnologías que están redefiniendo el comercio global.',
+      viewAll: 'Ver todos los artículos',
+      readMore: 'Leer Artículo',
+      back: 'Volver al Blog',
+      share: 'Compartir',
+      latest: 'Últimas Noticias',
+      categories: {
+        all: 'Todos',
+        ai: 'Inteligencia Artificial',
+        dev: 'Desarrollo',
+        security: 'Seguridad'
+      }
     }
   },
   en: {
@@ -359,6 +388,7 @@ export const translations = {
       solutions: 'Solutions',
       pricing: 'Investment',
       diagnostic: 'Lab Diagnostic',
+      blog: 'Insights',
       portal: 'Client Portal'
     },
     hero: {
@@ -523,9 +553,21 @@ export const translations = {
               message: 'Solid Digital Presence. Your business is at the forefront, now is the time to optimize conversions to the maximum.'
             },
             restart: 'RESTART DIAGNOSTIC'
-          }
+          },
+          recommendation_title: 'Recommended Plan',
+          recommendation_why: 'Why this plan?',
+          sending_report: 'Sending Action Plan...',
+          report_sent: 'Action Plan sent to Ancastav!',
+          report_error: 'Error sending report.'
         }
       }
+    },
+    seo: {
+      title: 'ancastav | Next-Gen Digital Architecture',
+      description: 'Experts in digital transformation. Web design, strategic SEO, and AI for elite businesses.',
+      keywords: 'web design, next.js, seo, artificial intelligence, digital transformation, ancastav, web optimization',
+      og_title: 'ancastav - Strategic Technology Partner',
+      og_description: 'We build your business\'s digital DNA with next-generation technology.'
     },
     services: {
       badge: 'SPECIALIZATION // SECTORIAL',
@@ -705,6 +747,22 @@ export const translations = {
         { value: 'AC', label: 'Digital Academies' },
         { value: 'PS', label: 'Professional Services' },
       ]
+    },
+    blog: {
+      badge: 'ARTICLES // WORLD_NODES',
+      title: 'Vanguard Insights',
+      description: 'Last-mile analysis of the technologies redefining global commerce.',
+      viewAll: 'View all articles',
+      readMore: 'Read Article',
+      back: 'Back to Blog',
+      share: 'Share',
+      latest: 'Latest News',
+      categories: {
+        all: 'All',
+        ai: 'Artificial Intelligence',
+        dev: 'Development',
+        security: 'Security'
+      }
     }
   }
 };

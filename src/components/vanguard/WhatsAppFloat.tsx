@@ -1,9 +1,15 @@
 import React from 'react';
+import { getTrackingCode } from '@/lib/utils';
 
 export const WhatsAppFloat: React.FC = () => {
   return (
     <a 
-      href="https://wa.me/18092329476?text=Hola,%20quisiera%20agendar%20una%20consultoría%20con%20Ancastav%20Digital%20Services" 
+      onClick={(e) => {
+        const code = getTrackingCode();
+        const baseUrl = "https://wa.me/18092329476";
+        const message = encodeURIComponent(`Hola, quisiera agendar una consultoría con Ancastav Digital Services.\n\n[ID: ${code}]`);
+        e.currentTarget.href = `${baseUrl}?text=${message}`;
+      }}
       target="_blank" 
       rel="noopener noreferrer"
       className="fixed bottom-8 right-8 z-[200] group"

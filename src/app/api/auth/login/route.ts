@@ -1,17 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { encrypt } from '@/lib/auth';
 import { cookies } from 'next/headers';
+import { getSql } from '@/lib/db';
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    // Credenciales solicitadas y seguras
-    const VALID_EMAIL = "admin@ancastav.com";
-    const VALID_PASS = "vanguardia2026"; // Cambiada a una más profesional
+    const sql = getSql();
+    if (!sql) {
+      return NextResponse.json({ error: 'Configuración de base de datos faltante' }, { status: 500 });
+    }
 
-    if (email === VALID_EMAIL && password === VALID_PASS) {
-      const user = { email: VALID_EMAIL, id: "1" };
+    const userRes = await sql`
+      SELECT id, email, name FROM admin_users 
+      WHERE email = ${email} AND password = ${password}
+      LIMIT 1
+    `;
+
+    if (userRes.length > 0) {
+      const user = userRes[0];
       const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 horas
       const session = await encrypt({ user, expires });
 

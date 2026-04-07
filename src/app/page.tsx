@@ -11,38 +11,61 @@ import { ProgressRoadmap } from "@/components/vanguard/ProgressRoadmap";
 import { WhatsAppFloat } from "@/components/vanguard/WhatsAppFloat";
 import { DiagnosticModal } from "@/components/vanguard/DiagnosticModal";
 import { DiagnosticForm } from "@/components/vanguard/DiagnosticForm";
+import { blogPosts } from "@/lib/blog-data";
+import { BlogPreview } from "@/components/vanguard/BlogPreview";
+import { useLanguage } from "@/context/LanguageContext";
 import { translations, Language } from "@/lib/translations";
 import Link from 'next/link';
+import Script from 'next/script';
+import Image from 'next/image';
 
 export default function Home() {
-  const [lang, setLang] = useState<Language>('es');
+  const { language: lang, toggleLanguage } = useLanguage();
 
-  // Load language from localStorage on mount
-  useEffect(() => {
-    const savedLang = localStorage.getItem('ancastav_lang') as Language;
-    if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
-      setLang(savedLang);
+  // JSON-LD Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ancastav Vanguard Platform",
+    "operatingSystem": "Web",
+    "applicationCategory": "BusinessApplication",
+    "browserRequirements": "Requires JavaScript",
+    "description": translations[lang].seo.description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "ancastav Digital Services",
+      "url": "https://ancastav.com"
     }
-  }, []);
-
-  const toggleLang = () => {
-    const newLang = lang === 'es' ? 'en' : 'es';
-    setLang(newLang);
-    localStorage.setItem('ancastav_lang', newLang);
   };
 
   const t = translations[lang];
   return (
     <main className="flex-1 bg-white overflow-x-hidden selection:bg-accent-blue selection:text-white font-inter">
+      {/* JSON-LD for Google */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <DiagnosticModal lang={lang} />
       <WhatsAppFloat />
       
       {/* Navigation Overlay */}
       <nav className="fixed top-0 w-full z-50 px-6 md:px-12 py-4 flex items-center justify-between bg-white border-b border-slate-100 shadow-sm transition-all duration-300">
         <div className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-accent-blue rounded-sm rotate-45 flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <div className="w-2 h-2 bg-white rounded-full" />
-          </div>
+            <Image 
+              src="/AncastavLogo.svg" 
+              alt="ANCASTAV" 
+              width={32} 
+              height={32} 
+              className="w-8 h-8 object-contain"
+              priority
+            />
           <span className="font-poppins text-3xl tracking-tighter text-accent-blue cursor-pointer font-black flex items-baseline gap-1">
             ancastav
           </span>
@@ -52,11 +75,12 @@ export default function Home() {
           <a href="#services" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</a>
           <a href="#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</a>
           <a href="#diagnostic-lab" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</a>
+          <Link href="/blog" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.blog}</Link>
           
           <div className="flex items-center gap-4 ml-4">
             {/* Language Toggle Button */}
             <button 
-              onClick={toggleLang}
+              onClick={toggleLanguage}
               className="px-3 py-1.5 border border-slate-200 rounded-lg hover:border-accent-blue hover:text-accent-blue transition-all duration-300 flex items-center gap-2 bg-white text-slate-400"
             >
               <span className="text-[14px]">🌐</span>
@@ -121,6 +145,9 @@ export default function Home() {
       {/* Roadmap Process */}
       <ProgressRoadmap lang={lang} />
 
+      {/* Blog Preview / Insights */}
+      <BlogPreview />
+
       {/* Final Conversion Section */}
       <section id="diagnostico" className="bg-slate-50 border-t border-slate-100">
         <div className="max-w-4xl mx-auto py-24">
@@ -132,10 +159,12 @@ export default function Home() {
       <footer className="py-24 px-6 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
           <div className="lg:col-span-1">
-            <h3 className="font-poppins font-black text-4xl text-accent-blue mb-8 tracking-tighter flex flex-col gap-1 items-start">
-              <span>ancastav</span>
-              <span className="text-[14px] text-slate-500 transition-colors uppercase tracking-widest font-medium">Digital Services</span>
-            </h3>
+            <div className="flex flex-col gap-4 mb-8">
+              <h3 className="font-poppins font-black text-4xl text-accent-blue tracking-tighter flex flex-col gap-1 items-start">
+                <span>ancastav</span>
+                <span className="text-[14px] text-slate-500 transition-colors uppercase tracking-widest font-medium">Digital Services</span>
+              </h3>
+            </div>
             <p className="text-slate-400 text-sm mb-10 leading-relaxed italic font-inter">
               {t.footer.bio}
             </p>

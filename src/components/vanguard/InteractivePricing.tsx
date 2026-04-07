@@ -98,7 +98,7 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) 
               </ul>
               
               <button 
-                onClick={() => window.dispatchEvent(new CustomEvent('open-diagnostic'))}
+                onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
                 className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300
                   ${plan.featured 
                     ? 'bg-accent-blue text-white hover:bg-slate-900 hover:scale-[1.02] shadow-lg shadow-blue-500/20' 

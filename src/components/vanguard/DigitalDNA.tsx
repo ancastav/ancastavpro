@@ -54,7 +54,8 @@ export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang }) => {
           {t.pillars.map((pillar, index) => (
             <div 
               key={index}
-              className="group p-8 rounded-2xl border border-slate-100 bg-slate-50 hover:bg-white hover:border-accent-blue/20 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 animate-reveal"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-diagnostic'))}
+              className="group p-8 rounded-2xl border border-slate-100 bg-slate-50 hover:bg-white hover:border-accent-blue/20 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 animate-reveal cursor-pointer"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               <div className="mb-6 p-4 inline-block rounded-xl bg-white group-hover:bg-accent-blue/10 group-hover:scale-110 transition-all duration-500 shadow-sm">
