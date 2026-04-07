@@ -75,7 +75,7 @@ export default function Home() {
           <a href="#services" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</a>
           <a href="#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</a>
           <a href="#diagnostic-lab" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</a>
-          <Link href="/blog" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.blog}</Link>
+          <Link href="/admin/dashboard" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.blog}</Link>
           
           <div className="flex items-center gap-4 ml-4">
             {/* Language Toggle Button */}
