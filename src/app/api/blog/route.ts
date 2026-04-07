@@ -62,10 +62,16 @@ export async function POST(req: NextRequest) {
       content_es, content_en 
     } = body;
 
-    // Validación básica
-    if (!slug || !title_es || !title_en) {
-      return NextResponse.json({ error: 'Faltan campos obligatorios (slug, títulos)' }, { status: 400 });
+    // Validación básica - solo slug y título en español son obligatorios
+    if (!slug || !title_es) {
+      return NextResponse.json({ error: 'Faltan campos obligatorios (slug, título en español)' }, { status: 400 });
     }
+
+    // Auto-fill English fields if not provided
+    const finalTitleEn = title_en || title_es;
+    const finalCategoryEn = category_en || category_es;
+    const finalExcerptEn = excerpt_en || excerpt_es || '';
+    const finalContentEn = content_en || content_es || '';
 
     const result = await sql`
       INSERT INTO blog_posts (
@@ -76,10 +82,10 @@ export async function POST(req: NextRequest) {
         content_es, content_en
       ) VALUES (
         ${slug}, ${date || new Date().toISOString().split('T')[0]}, ${image}, ${read_time},
-        ${category_es}, ${category_en},
-        ${title_es}, ${title_en},
-        ${excerpt_es}, ${excerpt_en},
-        ${content_es}, ${content_en}
+        ${category_es}, ${finalCategoryEn},
+        ${title_es}, ${finalTitleEn},
+        ${excerpt_es || ''}, ${finalExcerptEn},
+        ${content_es || ''}, ${finalContentEn}
       )
       RETURNING *
     `;
