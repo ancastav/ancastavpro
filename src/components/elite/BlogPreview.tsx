@@ -66,7 +66,7 @@ export const BlogPreview: React.FC = () => {
           {loading ? (
             <div className="col-span-full py-20 flex flex-col items-center justify-center gap-4 text-slate-400">
               <Loader2 size={40} className="animate-spin text-accent-blue" />
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] font-poppins">Sincronizando Vanguard Insights...</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] font-poppins">Sincronizando Insights...</p>
             </div>
           ) : latestPosts.map((post, i) => (
             <BlogCard key={post.id || post.slug || i} post={post} lang={language} />

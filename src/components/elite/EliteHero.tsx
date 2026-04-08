@@ -1,16 +1,16 @@
 import React from 'react';
 import { translations, Language } from "@/lib/translations";
 
-interface VanguardHeroProps {
+interface EliteHeroProps {
   lang: Language;
 }
 
-export const VanguardHero: React.FC<VanguardHeroProps> = ({ lang }) => {
+export const EliteHero: React.FC<EliteHeroProps> = ({ lang }) => {
   const t = translations[lang].hero;
   
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden bg-white">
-      {/* Background Vanguard Glows (Subtler for Light Mode) */}
+      {/* Background Elite Glows (Subtler for Light Mode) */}
       <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-accent-blue/5 rounded-full blur-[150px] animate-pulse" />
       <div className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
       

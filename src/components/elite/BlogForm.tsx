@@ -137,7 +137,7 @@ export default function BlogForm({ post, onClose, onSuccess }: BlogFormProps) {
               <h2 className="text-xl font-bold tracking-tight">
                 {post ? 'Editar Artículo' : 'Nuevo Artículo Elite'}
               </h2>
-              <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">Vanguard Insights CMS</p>
+              <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">Insights CMS</p>
             </div>
           </div>
           <button 

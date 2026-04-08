@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 import { blogPosts as staticPosts } from '@/lib/blog-data';
-import { BlogCard } from '@/components/vanguard/BlogCard';
-import { Layout } from '../../components/vanguard/Layout';
+import { BlogCard } from '@/components/elite/BlogCard';
+import { Layout } from '../../components/elite/Layout';
 import { Search, Loader2 } from 'lucide-react';
 
 export default function BlogPage() {

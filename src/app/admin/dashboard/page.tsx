@@ -33,7 +33,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import BlogForm from '@/components/vanguard/BlogForm';
+import BlogForm from '@/components/elite/BlogForm';
 import Image from "next/image";
 
 // Types
@@ -228,7 +228,7 @@ export default function UnifiedAdminDashboard() {
               {activeTab === 'settings' && (language === 'es' ? 'SEGURIDAD MASTER' : 'MASTER SECURITY')}
             </h1>
             <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] font-mono">
-              Vanguard Control System · 2026 Edition
+              Elite Control System · 2026 Edition
             </p>
           </div>
 
@@ -334,7 +334,7 @@ function OverviewTab({ stats }: any) {
             </p>
         </div>
         <div className="bg-gradient-to-br from-accent-blue/10 to-transparent border border-white/10 rounded-[2.5rem] p-8 aspect-video flex flex-col justify-end">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent-blue mb-2">Vanguard Status</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent-blue mb-2">Elite Status</h4>
             <h2 className="text-3xl font-black italic uppercase leading-none mb-4">Sistemas <br /> Optimizados</h2>
             <div className="flex gap-2">
                 {[1,2,3,4,5].map(i => <div key={i} className="h-1 w-8 bg-accent-blue/30 rounded-full" />)}
@@ -508,7 +508,7 @@ function BlogTab({ posts, loading, searchTerm, setSearchTerm, onEdit, onDelete }
             <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
                 <div className="flex items-center gap-3">
                     <FileText size={24} className="text-accent-blue" />
-                    <h2 className="text-xl font-black italic uppercase tracking-tight">Publicaciones Vanguard</h2>
+                    <h2 className="text-xl font-black italic uppercase tracking-tight">Publicaciones Elite</h2>
                 </div>
                 <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
@@ -614,7 +614,7 @@ function SettingsTab() {
                 </div>
                 <div>
                     <h2 className="text-2xl font-black italic uppercase tracking-tighter">Gestión de Seguridad</h2>
-                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Credenciales Maestras Vanguard</p>
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Credenciales Maestras Elite</p>
                 </div>
             </div>
 

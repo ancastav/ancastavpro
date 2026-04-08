@@ -28,7 +28,7 @@ export const translations = {
         {
           id: 'velocity',
           label: 'CORE // RENDIMIENTO',
-          title: 'Velocidad de Vanguardia',
+          title: 'Velocidad de Élite',
           description: 'Arquitectura Next.js que garantiza tiempos de carga instantáneos para maximizar la retención de usuarios.'
         },
         {
@@ -45,7 +45,7 @@ export const translations = {
         },
         {
           id: 'design',
-          label: 'CORE // VANGUARDIA',
+          label: 'CORE // INNOVACIÓN',
           title: 'Identidad Digital',
           description: 'Diseño UX/UI de última generación que eleva el valor percibido de tu marca y genera confianza.'
         }
@@ -168,7 +168,7 @@ export const translations = {
             },
             high: {
               status: 'Nivel Avanzado',
-              message: 'Presencia Digital Sólida. Tu negocio está a la vanguardia, ahora es momento de optimizar conversiones al máximo.'
+              message: 'Presencia Digital Sólida. Tu negocio está a la última en tecnología, ahora es momento de optimizar conversiones al máximo.'
             },
             restart: 'REINICIAR DIAGNÓSTICO'
           },
@@ -181,7 +181,7 @@ export const translations = {
       }
     },
     seo: {
-      title: 'ancastav | Arquitectura Digital de Vanguardia',
+      title: 'ancastav | Arquitectura Digital de Élite',
       description: 'Expertos en transformación digital. Diseño de sitios web, SEO estratégico e inteligencia artificial para negocios de élite.',
       keywords: 'diseño web, next.js, seo, inteligencia artificial, transformación digital, ancastav, optimización web',
       og_title: 'ancastav - Socio Tecnológico Estratégico',
@@ -297,11 +297,11 @@ export const translations = {
         { id: '01', title: 'Startups & Strategy', date: 'FASE_ALPHA', description: 'Investigación profunda del posicionamiento de la industria y definición del ADN de la marca.', originalStatus: 'COMPLETE' },
         { id: '02', title: 'Fundación Digital', date: 'FASE_BETA', description: 'Construyendo la infraestructura digital central con frameworks React/Next.js.', originalStatus: 'IN_PROGRESS' },
         { id: '03', title: 'Integración IA', date: 'FASE_GAMMA', description: 'Despliegue de nodos de inteligencia personalizados para el engagement automatizado del cliente.', originalStatus: 'QUEUED' },
-        { id: '04', title: 'Lanzamiento Vanguardia', date: 'FASE_RELEASE', description: 'Optimización completa de la plataforma y despliegue estratégico en el mercado.', originalStatus: 'QUEUED' }
+        { id: '04', title: 'Lanzamiento Estratégico', date: 'FASE_RELEASE', description: 'Optimización completa de la plataforma y despliegue estratégico en el mercado.', originalStatus: 'QUEUED' }
       ]
     },
     techstack: {
-      title: 'Arquitectura de Vanguardia',
+      title: 'Arquitectura de Élite',
       status: 'NODOS_SISTEMA_CORE: EJECUCIÓN_ESTABLE',
       technologies: [
        { name: 'Next.js', category: 'FRAMEWORK', icon: '⚡', description: 'La arquitectura React definitiva para velocidad y SSR.' },
@@ -333,7 +333,7 @@ export const translations = {
         cookies: 'Cookies'
       },
       rights: 'Todos los derechos reservados.',
-      powered: 'Desarrollado por Inteligencia de Vanguardia'
+      powered: 'Desarrollado por Inteligencia Estratégica'
     },
     diagnostic: {
       badge: 'Consultoría Estratégica',
@@ -368,7 +368,7 @@ export const translations = {
     },
     blog: {
       badge: 'ARTÍCULOS // NODOS_MUNDO',
-      title: 'Vanguard Insights',
+      title: 'Insights',
       description: 'Análisis de última milla sobre las tecnologías que están redefiniendo el comercio global.',
       viewAll: 'Ver todos los artículos',
       readMore: 'Leer Artículo',
@@ -410,7 +410,7 @@ export const translations = {
         {
           id: 'velocity',
           label: 'CORE // PERFORMANCE',
-          title: 'Vanguard Velocity',
+          title: 'Elite Velocity',
           description: 'Next.js architecture ensuring instant load times to maximize user retention.'
         },
         {
@@ -427,7 +427,7 @@ export const translations = {
         },
         {
           id: 'design',
-          label: 'CORE // VANGUARD',
+          label: 'CORE // INNOVATION',
           title: 'Digital Identity',
           description: 'Next-generation UX/UI design that elevates your brand\'s perceived value and builds trust.'
         }
@@ -679,11 +679,11 @@ export const translations = {
         { id: '01', title: 'Strategy Architecture', date: 'PHASE_ALPHA', description: 'Deep dive into industry positioning and brand DNA definition.', originalStatus: 'COMPLETE' },
         { id: '02', title: 'Digital Foundation', date: 'PHASE_BETA', description: 'Building the core digital infrastructure with React/Next.js frameworks.', originalStatus: 'IN_PROGRESS' },
         { id: '03', title: 'AI Integration', date: 'PHASE_GAMMA', description: 'Deploying custom intelligence nodes for automated client engagement.', originalStatus: 'QUEUED' },
-        { id: '04', title: 'Vanguard Launch', date: 'PHASE_RELEASE', description: 'Full platform optimization and strategic market deployment.', originalStatus: 'QUEUED' }
+        { id: '04', title: 'Strategic Launch', date: 'PHASE_RELEASE', description: 'Full platform optimization and strategic market deployment.', originalStatus: 'QUEUED' }
       ]
     },
     techstack: {
-      title: 'Vanguard Architecture',
+      title: 'Elite Architecture',
       status: 'CORE_SYSTEM_NODES: RUNNING_STABLE',
       technologies: [
        { name: 'Next.js', category: 'FRAMEWORK', icon: '⚡', description: 'The ultimate React architecture for speed and SSR.' },
@@ -715,7 +715,7 @@ export const translations = {
         cookies: 'Cookies'
       },
       rights: 'All Rights Reserved.',
-      powered: 'Powered by Vanguard Intelligence'
+      powered: 'Powered by Strategic Intelligence'
     },
     diagnostic: {
       badge: 'Strategic Consulting',
@@ -750,7 +750,7 @@ export const translations = {
     },
     blog: {
       badge: 'ARTICLES // WORLD_NODES',
-      title: 'Vanguard Insights',
+      title: 'Insights',
       description: 'Last-mile analysis of the technologies redefining global commerce.',
       viewAll: 'View all articles',
       readMore: 'Read Article',

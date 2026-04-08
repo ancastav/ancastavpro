@@ -27,12 +27,12 @@ export const ProgressRoadmap: React.FC<ProgressRoadmapProps> = ({ lang }) => {
             >
               {/* Animated Node */}
               <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-10">
-                <div className={`w-10 h-10 rounded-full border-4 border-white flex items-center justify-center glass-vanguard shadow-md ${step.originalStatus === 'COMPLETE' ? 'bg-accent-blue text-white' : step.originalStatus === 'IN_PROGRESS' ? 'bg-white text-accent-blue border-accent-blue animate-pulse' : 'bg-white text-slate-300'}`}>
+                <div className={`w-10 h-10 rounded-full border-4 border-white flex items-center justify-center glass-elite shadow-md ${step.originalStatus === 'COMPLETE' ? 'bg-accent-blue text-white' : step.originalStatus === 'IN_PROGRESS' ? 'bg-white text-accent-blue border-accent-blue animate-pulse' : 'bg-white text-slate-300'}`}>
                   {step.originalStatus === 'COMPLETE' ? '✓' : step.id}
                 </div>
               </div>
               
-              <div className={`w-full md:w-1/2 p-8 glass-vanguard rounded-xl border-slate-100 shadow-sm animate-reveal ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'}`}>
+              <div className={`w-full md:w-1/2 p-8 glass-elite rounded-xl border-slate-100 shadow-sm animate-reveal ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'}`}>
                 <div className={`flex items-center gap-4 mb-3 ${index % 2 === 0 ? 'justify-start md:justify-end' : 'justify-start'}`}>
                   <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase font-mono">{step.date}</span>
                   <span className={`px-2 py-[2px] text-[8px] font-bold rounded-full ${step.originalStatus === 'COMPLETE' ? 'bg-blue-50 text-accent-blue' : step.originalStatus === 'IN_PROGRESS' ? 'bg-amber-50 text-amber-600' : 'bg-slate-100 text-slate-500'}`}>

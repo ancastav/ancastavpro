@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 import { blogPosts as staticPosts } from "@/lib/blog-data";
-import { Layout } from "../../../components/vanguard/Layout";
+import { Layout } from "../../../components/elite/Layout";
 import { Calendar, Clock, ArrowLeft, Share2, Globe, Mail, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';

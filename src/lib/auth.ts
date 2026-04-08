@@ -8,7 +8,7 @@ interface SessionPayload extends JWTPayload {
   expires: Date;
 }
 
-const secretKey = "vanguardia_ancastav_secret_key_change_me_in_prod";
+const secretKey = "elite_ancastav_secret_key_change_me_in_prod";
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: JWTPayload) {

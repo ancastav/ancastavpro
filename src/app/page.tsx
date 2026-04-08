@@ -1,18 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { VanguardHero } from "@/components/vanguard/VanguardHero";
-import { DigitalDNA } from "@/components/vanguard/DigitalDNA";
-import { DigitalDNAModules } from "@/components/vanguard/DigitalDNAModules";
-import { AgenticServices } from "@/components/vanguard/AgenticServices";
-import { InteractivePricing } from "@/components/vanguard/InteractivePricing";
-import { TechStack } from "@/components/vanguard/TechStack";
-import { ProgressRoadmap } from "@/components/vanguard/ProgressRoadmap";
-import { WhatsAppFloat } from "@/components/vanguard/WhatsAppFloat";
-import { DiagnosticModal } from "@/components/vanguard/DiagnosticModal";
-import { DiagnosticForm } from "@/components/vanguard/DiagnosticForm";
+import { EliteHero } from "@/components/elite/EliteHero";
+import { DigitalDNA } from "@/components/elite/DigitalDNA";
+import { DigitalDNAModules } from "@/components/elite/DigitalDNAModules";
+import { AgenticServices } from "@/components/elite/AgenticServices";
+import { InteractivePricing } from "@/components/elite/InteractivePricing";
+import { TechStack } from "@/components/elite/TechStack";
+import { ProgressRoadmap } from "@/components/elite/ProgressRoadmap";
+import { WhatsAppFloat } from "@/components/elite/WhatsAppFloat";
+import { DiagnosticModal } from "@/components/elite/DiagnosticModal";
+import { DiagnosticForm } from "@/components/elite/DiagnosticForm";
 import { blogPosts } from "@/lib/blog-data";
-import { BlogPreview } from "@/components/vanguard/BlogPreview";
+import { BlogPreview } from "@/components/elite/BlogPreview";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations, Language } from "@/lib/translations";
 import Link from 'next/link';
@@ -26,7 +26,7 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ancastav Vanguard Platform",
+    "name": "ancastav Platform",
     "operatingSystem": "Web",
     "applicationCategory": "BusinessApplication",
     "browserRequirements": "Requires JavaScript",
@@ -63,7 +63,7 @@ export default function Home() {
               alt="ANCASTAV" 
               width={32} 
               height={32} 
-              className="w-8 h-8 object-contain"
+              className="group-hover:rotate-12 transition-transform duration-500"
               priority
             />
           <span className="font-poppins text-3xl tracking-tighter text-accent-blue cursor-pointer font-black flex items-baseline gap-1">
@@ -94,7 +94,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Experience */}
-      <VanguardHero lang={lang} />
+      <EliteHero lang={lang} />
 
       {/* Strategic Pillars */}
       <DigitalDNA lang={lang} />

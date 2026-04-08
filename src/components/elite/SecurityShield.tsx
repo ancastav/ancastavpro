@@ -46,7 +46,7 @@ export default function SecurityShield() {
       'color: #2563eb; font-size: 30px; font-weight: bold; -webkit-text-stroke: 1px black;'
     );
     console.log(
-      '%cEste entorno está protegido. El acceso no autorizado al código fuente está restringido por protocolos de seguridad del Vanguard Digital Lab.',
+      '%cEste entorno está protegido. El acceso no autorizado al código fuente está restringido por protocolos de seguridad de Ancastav Digital Lab.',
       'color: #475569; font-size: 14px;'
     );
 

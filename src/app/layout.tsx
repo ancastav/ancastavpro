@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import SecurityShield from "@/components/vanguard/SecurityShield";
-import GoogleAnalytics from "@/components/vanguard/GoogleAnalytics";
+import SecurityShield from "@/components/elite/SecurityShield";
+import GoogleAnalytics from "@/components/elite/GoogleAnalytics";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({

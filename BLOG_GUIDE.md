@@ -1,4 +1,4 @@
-# Guía de Publicación: Vanguard Insights (Ancastav Tech Blog)
+# Guía de Publicación: Elite Insights (Ancastav Tech Blog)
 
 Este manual te explica paso a paso cómo gestionar el contenido de tu nuevo blog tecnológico.
 
