@@ -41,9 +41,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Link href="/#services" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</Link>
           <Link href="/#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</Link>
           <Link href="/#diagnostic-lab" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</Link>
-          <Link href="/admin/dashboard" className="px-6 py-2 bg-slate-50 border border-slate-200 hover:border-accent-blue hover:bg-accent-blue/5 transition-all duration-500 rounded-full text-slate-900 backdrop-blur-md shadow-sm">
-            {t.nav.blog}
-          </Link>
           
           <div className="flex items-center gap-4 ml-4">
             <button 
@@ -51,11 +48,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               className="px-3 py-1.5 border border-slate-200 rounded-lg hover:border-accent-blue hover:text-accent-blue transition-all duration-300 flex items-center gap-2 bg-white text-slate-400 outline-none"
             >
               <span className="text-[14px]">🌐</span>
-              <span className="font-mono text-[9px] tracking-widest">{language.toUpperCase()}</span>
+              <span className="font-mono text-[10px] tracking-widest">{language.toUpperCase()}</span>
             </button>
 
-            <Link href="/login" className="text-slate-400 hover:text-accent-blue transition-all duration-300">
-              {t.nav.portal}
+            <Link href="/admin/dashboard" className="px-6 py-2 bg-slate-50 border border-slate-200 hover:border-accent-blue hover:bg-accent-blue/5 transition-all duration-500 rounded-full text-slate-900 backdrop-blur-md shadow-sm">
+              {t.nav.blog}
             </Link>
           </div>
         </div>
