@@ -51,8 +51,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span className="font-mono text-[10px] tracking-widest">{language.toUpperCase()}</span>
             </button>
 
-            <Link href="/admin/dashboard" className="px-6 py-2 bg-slate-50 border border-slate-200 hover:border-accent-blue hover:bg-accent-blue/5 transition-all duration-500 rounded-full text-slate-900 backdrop-blur-md shadow-sm">
-              {t.nav.blog}
+            <Link href="/login" className="px-6 py-2 bg-slate-50 border border-slate-200 hover:border-accent-blue hover:bg-accent-blue/5 transition-all duration-500 rounded-full text-slate-900 backdrop-blur-md shadow-sm">
+              {t.nav.portal}
             </Link>
           </div>
         </div>

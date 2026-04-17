@@ -1,6 +1,9 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Metadata } from 'next';
+import { headers } from 'next/headers';
+import Script from 'next/script';
+import Image from 'next/image';
+import { translations, Language } from "@/lib/translations";
 import { EliteHero } from "@/components/elite/EliteHero";
 import { DigitalDNA } from "@/components/elite/DigitalDNA";
 import { DigitalDNAModules } from "@/components/elite/DigitalDNAModules";
@@ -8,42 +11,83 @@ import { AgenticServices } from "@/components/elite/AgenticServices";
 import { InteractivePricing } from "@/components/elite/InteractivePricing";
 import { TechStack } from "@/components/elite/TechStack";
 import { ProgressRoadmap } from "@/components/elite/ProgressRoadmap";
-import { WhatsAppFloat } from "@/components/elite/WhatsAppFloat";
-import { DiagnosticModal } from "@/components/elite/DiagnosticModal";
 import { DiagnosticForm } from "@/components/elite/DiagnosticForm";
-import { blogPosts } from "@/lib/blog-data";
-import { BlogPreview } from "@/components/elite/BlogPreview";
-import { useLanguage } from "@/context/LanguageContext";
-import { translations, Language } from "@/lib/translations";
-import Link from 'next/link';
-import Script from 'next/script';
-import Image from 'next/image';
+import { Navbar } from "@/components/elite/Navbar";
+import { ClientOnlyInteractions } from "@/components/elite/ClientOnlyInteractions";
+import { DiagnosticTrigger } from "@/components/elite/DiagnosticTrigger";
 
-export default function Home() {
-  const { language: lang, toggleLanguage } = useLanguage();
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const acceptLanguage = headersList.get('accept-language') || '';
+  const lang = acceptLanguage.startsWith('en') ? 'en' : ('es' as Language);
+  const t = translations[lang].seo;
+
+  return {
+    title: t.title,
+    description: t.description,
+  };
+}
+
+export default async function Home() {
+  const headersList = await headers();
+  const acceptLanguage = headersList.get('accept-language') || '';
+  const lang = acceptLanguage.startsWith('en') ? 'en' : ('es' as Language);
+  const t = translations[lang];
 
   // JSON-LD Structured Data
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "ancastav Platform",
-    "operatingSystem": "Web",
-    "applicationCategory": "BusinessApplication",
-    "browserRequirements": "Requires JavaScript",
-    "description": translations[lang].seo.description,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ANCASTAV Platform",
+      "operatingSystem": "Web",
+      "applicationCategory": "BusinessApplication",
+      "description": t.seo.description,
+      "provider": {
+        "@type": "Organization",
+        "name": "ANCASTAV Digital Services",
+        "url": "https://ancastav.com",
+        "logo": "https://ancastav.com/AncastavLogo.svg",
+        "sameAs": [
+          "https://www.instagram.com/ancastav/",
+          "https://www.facebook.com/ancastav",
+          "https://www.linkedin.com/company/ancastav"
+        ]
+      }
     },
-    "provider": {
-      "@type": "Organization",
-      "name": "ancastav Digital Services",
-      "url": "https://ancastav.com"
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ANCASTAV Digital Services",
+      "image": "https://ancastav.com/AncastavLogo.svg",
+      "@id": "https://ancastav.com",
+      "url": "https://ancastav.com",
+      "telephone": "+18092329476",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Puerto Plata",
+        "addressLocality": "Puerto Plata",
+        "addressRegion": "Puerto Plata",
+        "postalCode": "57000",
+        "addressCountry": "DO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.7806,
+        "longitude": -70.6871
+      },
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
     }
-  };
+  ];
 
-  const t = translations[lang];
   return (
     <main className="flex-1 bg-white overflow-x-hidden selection:bg-accent-blue selection:text-white font-inter">
       {/* JSON-LD for Google */}
@@ -52,48 +96,13 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <DiagnosticModal lang={lang} />
-      <WhatsAppFloat />
       
-      {/* Navigation Overlay */}
-      <nav className="fixed top-0 w-full z-50 px-6 md:px-12 py-4 flex items-center justify-between bg-white border-b border-slate-100 shadow-sm transition-all duration-300">
-        <div className="flex items-center gap-3 group">
-            <Image 
-              src="/AncastavLogo.svg" 
-              alt="ANCASTAV" 
-              width={32} 
-              height={32} 
-              className="group-hover:rotate-12 transition-transform duration-500"
-              priority
-            />
-          <span className="font-poppins text-3xl tracking-tighter text-accent-blue cursor-pointer font-black flex items-baseline gap-1">
-            ancastav
-          </span>
-        </div>
-        
-        <div className="hidden lg:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-black">
-          <a href="#services" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</a>
-          <a href="#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</a>
-          <a href="#diagnostic-lab" className="text-slate-400 hover:text-accent-blue transition-all duration-300 font-bold border-b border-accent-blue/40 pb-1">{t.nav.diagnostic}</a>
-          
-          <div className="flex items-center gap-4 ml-4">
-            {/* Language Toggle Button */}
-            <button 
-              onClick={toggleLanguage}
-              className="px-3 py-1.5 border border-slate-200 rounded-lg hover:border-accent-blue hover:text-accent-blue transition-all duration-300 flex items-center gap-2 bg-white text-slate-400"
-            >
-              <span className="text-[14px]">🌐</span>
-              <span className="font-mono text-[10px] tracking-widest">{lang.toUpperCase()}</span>
-            </button>
+      <ClientOnlyInteractions lang={lang} />
+      
+      {/* Navbar will handle its own state but data comes from server */}
+      <Navbar lang={lang} t={t} toggleLanguage={() => {}} />
 
-            <Link href="/admin/dashboard" className="px-6 py-2 bg-slate-50 border border-slate-200 hover:border-accent-blue hover:bg-accent-blue/5 transition-all duration-500 rounded-full text-slate-900 backdrop-blur-md shadow-sm">
-              {t.nav.blog}
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Experience */}
+      {/* Hero Experience - Optimized Server Component */}
       <EliteHero lang={lang} />
 
       {/* Strategic Pillars */}
@@ -110,7 +119,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-blue/5 to-transparent opacity-30" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-poppins font-black text-slate-900 mb-10 tracking-tighter uppercase transition-all duration-500 hover:tracking-tight">
-            {t.stats.title.split(' ').map((word, i, arr) => (
+            {t.stats.title.split(' ').map((word: string, i: number, arr: string[]) => (
               <React.Fragment key={i}>
                 {i >= arr.length - 2 ? <span className="text-accent-blue italic">{word} </span> : <span>{word} </span>}
               </React.Fragment>
@@ -144,11 +153,8 @@ export default function Home() {
       {/* Roadmap Process */}
       <ProgressRoadmap lang={lang} />
 
-      {/* Blog Preview / Insights */}
-      <BlogPreview />
-
       {/* Final Conversion Section */}
-      <section id="diagnostico" className="bg-slate-50 border-t border-slate-100">
+      <section className="bg-slate-50 border-t border-slate-100">
         <div className="max-w-4xl mx-auto py-24">
           <DiagnosticForm lang={lang} />
         </div>
@@ -160,7 +166,7 @@ export default function Home() {
           <div className="lg:col-span-1">
             <div className="flex flex-col gap-4 mb-8">
               <h3 className="font-poppins font-black text-4xl text-accent-blue tracking-tighter flex flex-col gap-1 items-start">
-                <span>ancastav</span>
+                <span>ANCASTAV</span>
                 <span className="text-[14px] text-slate-500 transition-colors uppercase tracking-widest font-medium">Digital Services</span>
               </h3>
             </div>
@@ -168,10 +174,20 @@ export default function Home() {
               {t.footer.bio}
             </p>
             <div className="flex gap-4">
-               {['TW', 'LI', 'IG'].map(social => (
-                 <div key={social} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-[10px] text-slate-400 font-black hover:border-accent-blue hover:text-accent-blue transition-all cursor-pointer bg-white shadow-sm font-mono">
-                   {social}
-                 </div>
+               {[
+                 { id: 'IG', url: 'https://www.instagram.com/ancastav/' },
+                 { id: 'LI', url: 'https://www.linkedin.com/company/ancastav' },
+                 { id: 'FB', url: 'https://www.facebook.com/ancastav' }
+               ].map(social => (
+                 <a 
+                   key={social.id} 
+                   href={social.url}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-[10px] text-slate-400 font-black hover:border-accent-blue hover:text-accent-blue transition-all cursor-pointer bg-white shadow-sm font-mono"
+                 >
+                   {social.id}
+                 </a>
                ))}
             </div>
           </div>
@@ -201,7 +217,7 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto mt-24 pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] uppercase font-black text-slate-300 tracking-[0.4em] font-mono">
-          <span>&copy; 2026 ancastav Digital Services. {t.footer.rights}</span>
+          <span>&copy; 2026 ANCASTAV Digital Services. {t.footer.rights}</span>
           <span className="text-accent-blue/40 animate-pulse">{t.footer.powered}</span>
         </div>
       </footer>

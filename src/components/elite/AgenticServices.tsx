@@ -14,6 +14,8 @@ const serviceIcons = [
   { id: 'PS', icon: '💼' },
 ];
 
+import { ClientTrigger } from './ClientTrigger';
+
 export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
   const t = translations[lang].services;
   
@@ -38,11 +40,10 @@ export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {t.items.map((service, index) => (
-            <div 
+            <ClientTrigger 
               key={index}
-              onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
+              event="open-contact"
               className="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-accent-blue/20 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 cursor-pointer animate-reveal overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Background accent icon (Reduced opacity) */}
               <div className="absolute -top-6 -right-6 text-8xl opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-700 group-hover:scale-110 group-hover:-rotate-12 pointer-events-none filter grayscale group-hover:grayscale-0">

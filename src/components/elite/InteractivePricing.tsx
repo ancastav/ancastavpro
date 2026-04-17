@@ -97,15 +97,20 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) 
                 ))}
               </ul>
               
-              <button 
-                onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
-                className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300
+import { ClientTrigger } from './ClientTrigger';
+
+export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) => {
+  const t = translations[lang].investment;
+...
+              <ClientTrigger 
+                event="open-contact"
+                className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 cursor-pointer
                   ${plan.featured 
                     ? 'bg-accent-blue text-white hover:bg-slate-900 hover:scale-[1.02] shadow-lg shadow-blue-500/20' 
                     : 'bg-slate-100 text-slate-900 hover:bg-slate-200 hover:scale-[1.02]'}`}
               >
                 {plan.cta}
-              </button>
+              </ClientTrigger>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import SecurityShield from "@/components/elite/SecurityShield";
@@ -17,6 +18,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ancastav.com'),
+  alternates: {
+    canonical: '/',
+  },
   title: "Diseño Web Profesional en República Dominicana | ANCASTAV",
   description: "Diseño web profesional para MiPyMEs en Puerto Plata y toda República Dominicana. Creamos tu página web desde $249. Inmobiliarias, clínicas, negocios locales y más. ¡Cotiza gratis hoy!",
   keywords: "diseño web, puerto plata, república dominicana, mipymes, inmobiliarias, clínicas, seo, marketing digital, ancastav",
@@ -40,19 +45,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const acceptLanguage = headersList.get('accept-language') || '';
+  const lang = acceptLanguage.startsWith('en') ? 'en' : 'es';
+
   return (
     <html
-      lang="es"
+      lang={lang}
       suppressHydrationWarning
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <head>
         <meta name="impact-site-verification" {...({ value: "-398674695" } as any)} />
+        {/* REEMPLAZAR EL VALOR DE ABAJO CON TU CÓDIGO DE GOOGLE SEARCH CONSOLE */}
+        <meta name="google-site-verification" content="TU_CODIGO_AQUI" />
         {/* Google Analytics - Direct Head Injection for Verification */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-J82GSK0CNB" />
         <script dangerouslySetInnerHTML={{
