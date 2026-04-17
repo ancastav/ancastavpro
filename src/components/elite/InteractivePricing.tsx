@@ -1,5 +1,6 @@
 import React from 'react';
 import { translations, Language } from "@/lib/translations";
+import { ClientTrigger } from './ClientTrigger';
 
 interface InteractivePricingProps {
   lang: Language;
@@ -97,11 +98,6 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) 
                 ))}
               </ul>
               
-import { ClientTrigger } from './ClientTrigger';
-
-export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) => {
-  const t = translations[lang].investment;
-...
               <ClientTrigger 
                 event="open-contact"
                 className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 cursor-pointer

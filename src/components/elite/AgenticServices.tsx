@@ -1,5 +1,6 @@
 import React from 'react';
 import { translations, Language } from "@/lib/translations";
+import { ClientTrigger } from './ClientTrigger';
 
 interface AgenticServicesProps {
   lang: Language;
@@ -13,8 +14,6 @@ const serviceIcons = [
   { id: 'AC', icon: '🎓' },
   { id: 'PS', icon: '💼' },
 ];
-
-import { ClientTrigger } from './ClientTrigger';
 
 export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
   const t = translations[lang].services;
