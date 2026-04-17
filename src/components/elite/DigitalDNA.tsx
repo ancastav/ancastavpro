@@ -1,5 +1,6 @@
 import React from 'react';
 import { translations, Language } from "@/lib/translations";
+import { DiagnosticTrigger } from './DiagnosticTrigger';
 
 interface DigitalDNAProps {
   lang: Language;
@@ -27,8 +28,6 @@ const pillarIcons = [
     </svg>
   )
 ];
-
-import { DiagnosticTrigger } from './DiagnosticTrigger';
 
 export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang }) => {
   const t = translations[lang].dna;
@@ -77,7 +76,7 @@ export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang }) => {
               <div className="mt-8 overflow-hidden h-[1px] w-full bg-slate-200">
                 <div className="h-full bg-accent-blue w-0 group-hover:w-full transition-all duration-700" />
               </div>
-            </div>
+            </DiagnosticTrigger>
           ))}
         </div>
       </div>
