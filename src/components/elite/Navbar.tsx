@@ -7,11 +7,10 @@ import { Language } from "@/lib/translations";
 
 interface NavbarProps {
   lang: Language;
-  toggleLanguage?: () => void;
   t: any;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ lang, toggleLanguage, t }) => {
+export const Navbar: React.FC<NavbarProps> = ({ lang, t }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -53,8 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, toggleLanguage, t }) => {
         <div className="flex items-center gap-4 ml-4">
           {/* Language Toggle Button */}
           <button 
-            onClick={toggleLanguage}
-            className="px-3 py-1.5 border border-slate-200 rounded-lg hover:border-accent-blue hover:text-accent-blue transition-all duration-300 flex items-center gap-2 bg-white text-slate-400"
+            className="px-3 py-1.5 border border-slate-200 rounded-lg flex items-center gap-2 bg-white text-slate-400 cursor-default"
           >
             <span className="text-[14px]">🌐</span>
             <span className="font-mono text-[10px] tracking-widest">{lang.toUpperCase()}</span>

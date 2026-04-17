@@ -100,7 +100,7 @@ export default async function Home() {
       <ClientOnlyInteractions lang={lang} />
       
       {/* Navbar will handle its own state but data comes from server */}
-      <Navbar lang={lang} t={ t} /> 
+      <Navbar lang={lang} t={t} />
 
       {/* Hero Experience - Optimized Server Component */}
       <EliteHero lang={lang} />
@@ -110,6 +110,7 @@ export default async function Home() {
 
       {/* Diagnostic Modules Expansion */}
       <DigitalDNAModules lang={lang} />
+
       {/* Vertical Solutions */}
       <AgenticServices lang={lang} />
 
