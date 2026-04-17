@@ -1,13 +1,15 @@
+'use client';
+
 import React from 'react';
-import { translations, Language } from "@/lib/translations";
+import { Language } from "@/lib/translations";
 import { ClientTrigger } from './ClientTrigger';
 
 interface InteractivePricingProps {
   lang: Language;
+  t: any;
 }
 
-export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang }) => {
-  const t = translations[lang].investment;
+export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang, t }) => {
 
   const plans = [
     {

@@ -1,13 +1,15 @@
+'use client';
+
 import React from 'react';
-import { translations, Language } from "@/lib/translations";
+import { Language } from "@/lib/translations";
 import { InteractiveADNDiagnostic } from './InteractiveADNDiagnostic';
 
 interface DigitalDNAModulesProps {
   lang: Language;
+  t: any;
 }
 
-export const DigitalDNAModules: React.FC<DigitalDNAModulesProps> = ({ lang }) => {
-  const t = translations[lang].dna_modules;
+export const DigitalDNAModules: React.FC<DigitalDNAModulesProps> = ({ lang, t }) => {
   
   return (
     <section id="diagnostic-lab" className="py-24 px-6 bg-slate-950 relative overflow-hidden font-poppins">

@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
-import { translations, Language } from "@/lib/translations";
+import { Language } from "@/lib/translations";
 import { DiagnosticTrigger } from './DiagnosticTrigger';
 
 interface DigitalDNAProps {
   lang: Language;
+  t: any;
 }
 
 const pillarIcons = [
@@ -29,8 +32,7 @@ const pillarIcons = [
   )
 ];
 
-export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang }) => {
-  const t = translations[lang].dna;
+export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang, t }) => {
   
   return (
     <section className="py-24 px-6 bg-white relative overflow-hidden border-t border-slate-100 font-poppins">

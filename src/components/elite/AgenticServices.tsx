@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
-import { translations, Language } from "@/lib/translations";
+import { Language } from "@/lib/translations";
 import { ClientTrigger } from './ClientTrigger';
 
 interface AgenticServicesProps {
   lang: Language;
+  t: any;
 }
 
 const serviceIcons = [
@@ -15,8 +18,7 @@ const serviceIcons = [
   { id: 'PS', icon: '💼' },
 ];
 
-export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
-  const t = translations[lang].services;
+export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang, t }) => {
   
   return (
     <section id="services" className="py-32 px-6 bg-white relative overflow-hidden border-t border-slate-100 font-poppins">

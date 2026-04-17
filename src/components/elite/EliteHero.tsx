@@ -1,12 +1,14 @@
+'use client';
+
 import React from 'react';
-import { translations, Language } from "@/lib/translations";
+import { Language } from "@/lib/translations";
 
 interface EliteHeroProps {
   lang: Language;
+  t: any;
 }
 
-export const EliteHero: React.FC<EliteHeroProps> = ({ lang }) => {
-  const t = translations[lang].hero;
+export const EliteHero: React.FC<EliteHeroProps> = ({ lang, t }) => {
   
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden bg-white">

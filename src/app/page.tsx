@@ -103,16 +103,16 @@ export default async function Home() {
       <Navbar lang={lang} t={t} />
 
       {/* Hero Experience - Optimized Server Component */}
-      <EliteHero lang={lang} />
+      <EliteHero lang={lang} t={t.hero} />
 
       {/* Strategic Pillars */}
-      <DigitalDNA lang={lang} />
+      <DigitalDNA lang={lang} t={t.dna} />
 
       {/* Diagnostic Modules Expansion */}
-      <DigitalDNAModules lang={lang} />
+      <DigitalDNAModules lang={lang} t={t.dna_modules} />
 
       {/* Vertical Solutions */}
-      <AgenticServices lang={lang} />
+      <AgenticServices lang={lang} t={t.services} />
 
       {/* Trust & Stats Mid-Section */}
       <section className="py-32 px-6 border-y border-slate-100 relative overflow-hidden bg-white">
@@ -145,7 +145,7 @@ export default async function Home() {
       </section>
 
       {/* Investment Plans */}
-      <InteractivePricing lang={lang} />
+      <InteractivePricing lang={lang} t={t.investment} />
 
       {/* Engineering Stack */}
       <TechStack lang={lang} />
