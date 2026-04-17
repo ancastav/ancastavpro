@@ -73,7 +73,7 @@ export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang }) => {
               <div className="absolute bottom-0 left-0 h-[1px] w-full bg-slate-100">
                 <div className="h-full bg-accent-blue w-0 group-hover:w-full transition-all duration-1000 ease-out" />
               </div>
-            </div>
+            </ClientTrigger>
           ))}
         </div>
       </div>
