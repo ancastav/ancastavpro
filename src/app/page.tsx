@@ -32,7 +32,7 @@ export default async function Home() {
   const headersList = await headers();
   const acceptLanguage = headersList.get('accept-language') || '';
   const lang = acceptLanguage.startsWith('en') ? 'en' : ('es' as Language);
-  const t = translations[lang];
+  const t = JSON.parse(JSON.stringify(translations[lang]));
 
   // JSON-LD Structured Data
   const jsonLd = [
