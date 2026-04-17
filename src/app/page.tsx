@@ -38,27 +38,27 @@ export default async function Home() {
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "ANCASTAV Platform",
-      "operatingSystem": "Web",
-      "applicationCategory": "BusinessApplication",
-      "description": t.seo.description,
-      "provider": {
-        "@type": "Organization",
-        "name": "ANCASTAV Digital Services",
-        "url": "https://ancastav.com",
-        "logo": "https://ancastav.com/AncastavLogo.svg",
-        "sameAs": [
-          "https://www.instagram.com/ancastav/",
-          "https://www.facebook.com/ancastav",
-          "https://www.linkedin.com/company/ancastav"
-        ]
-      }
+      "@type": "Organization",
+      "name": "ANCASTAV",
+      "alternateName": "ANCASTAV Digital",
+      "url": "https://ancastav.com",
+      "logo": "https://ancastav.com/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-809-232-9476",
+        "contactType": "customer service",
+        "areaServed": "DO",
+        "availableLanguage": ["Spanish", "English"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/ancastav",
+        "https://www.instagram.com/ancastav",
+        "https://www.linkedin.com/company/ancastav"
+      ]
     },
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "ANCASTAV Digital Services",
       "image": "https://ancastav.com/AncastavLogo.svg",
       "@id": "https://ancastav.com",
       "url": "https://ancastav.com",

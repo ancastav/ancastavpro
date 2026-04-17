@@ -23,7 +23,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://ancastav.com'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://ancastav.com',
   },
   title: "Diseño Web Profesional en República Dominicana | ANCASTAV",
   description: "Diseño web profesional para MiPyMEs en Puerto Plata y toda República Dominicana. Creamos tu página web desde $249. Inmobiliarias, clínicas, negocios locales y más. ¡Cotiza gratis hoy!",
