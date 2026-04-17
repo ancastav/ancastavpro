@@ -7,7 +7,7 @@ import { Language } from "@/lib/translations";
 
 interface NavbarProps {
   lang: Language;
-  toggleLanguage: () => void;
+  toggleLanguage?: () => void;
   t: any;
 }
 
