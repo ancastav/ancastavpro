@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Inter, Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import SecurityShield from "@/components/elite/SecurityShield";
 import GoogleAnalytics from "@/components/elite/GoogleAnalytics";
@@ -9,12 +10,14 @@ import { LanguageProvider } from "@/context/LanguageContext";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -64,16 +67,18 @@ export default async function RootLayout({
         <meta name="impact-site-verification" {...({ value: "-398674695" } as any)} />
         {/* REEMPLAZAR EL VALOR DE ABAJO CON TU CÓDIGO DE GOOGLE SEARCH CONSOLE */}
         <meta name="google-site-verification" content="TU_CODIGO_AQUI" />
-        {/* Google Analytics - Direct Head Injection for Verification */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J82GSK0CNB" />
-        <script dangerouslySetInnerHTML={{
-          __html: `
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J82GSK0CNB"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-J82GSK0CNB');
-          `
-        }} />
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col font-poppins bg-white text-slate-900">
         <LanguageProvider>

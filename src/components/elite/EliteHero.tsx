@@ -27,10 +27,10 @@ export const EliteHero: React.FC<EliteHeroProps> = ({ lang }) => {
           <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">{t.badge}</span>
         </div>
 
-        <h1 className="text-5xl md:text-[100px] font-poppins mb-8 leading-[0.9] tracking-tighter uppercase transition-all duration-700 font-black">
-          <span className="block text-slate-900 animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-forwards">{t.title1}</span>
-          <span className="block text-accent-blue animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-forwards">{t.title2}</span>
-          <span className="block text-slate-400 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 fill-mode-forwards">{t.title3}</span>
+        <h1 className="text-5xl md:text-[100px] font-poppins mb-8 leading-[0.9] tracking-tighter uppercase font-black">
+          <span className="block text-slate-900">{t.title1}</span>
+          <span className="block text-accent-blue">{t.title2}</span>
+          <span className="block text-slate-400">{t.title3}</span>
         </h1>
         
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 mb-12 font-inter leading-relaxed">
