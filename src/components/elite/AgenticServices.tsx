@@ -40,7 +40,7 @@ export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang, t }) => 
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {t.items.map((service, index) => (
+            {t.items.map((service: any, index: number) => (
             <ClientTrigger 
               key={index}
               event="open-contact"
