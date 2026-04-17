@@ -45,11 +45,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const language = acceptLanguage.startsWith('en') ? 'en' : 'es';
 
   const getField = (field: string) => {
-    if (post[field] && typeof post[field] === 'object') {
-      return post[field][language];
+    const postData = post as any;
+    if (postData[field] && typeof postData[field] === 'object') {
+      return postData[field][language];
     }
     const key = `${field}_${language}`;
-    return post[key] || post[field] || '';
+    return postData[key] || postData[field] || '';
   };
 
   const title = getField('title');
