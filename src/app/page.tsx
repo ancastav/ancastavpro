@@ -100,7 +100,7 @@ export default async function Home() {
       <ClientOnlyInteractions lang={lang} />
       
       {/* Navbar will handle its own state but data comes from server */}
-      <Navbar lang={lang} t={t} toggleLanguage={() => {}} />
+      <Navbar lang={lang} t={ t} />/>
 
       {/* Hero Experience - Optimized Server Component */}
       <EliteHero lang={lang} />
