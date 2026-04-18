@@ -54,7 +54,7 @@ export const DigitalDNA: React.FC<DigitalDNAProps> = ({ lang, t }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {t.pillars.map((pillar, index) => (
+          {t.pillars.map((pillar: any, index: number) => (
             <DiagnosticTrigger 
               key={index}
               className="group p-8 rounded-2xl border border-slate-100 bg-slate-50 hover:bg-white hover:border-accent-blue/20 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 animate-reveal cursor-pointer"

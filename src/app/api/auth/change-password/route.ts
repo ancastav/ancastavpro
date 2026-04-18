@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSql } from '@/lib/db';
-import { getSession } from '@/lib/auth';
+import { getSession, comparePasswords, hashPassword } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,18 +15,28 @@ export async function POST(req: NextRequest) {
 
     // Verificar contraseña actual
     const userRes = await sql`
-      SELECT id FROM admin_users 
-      WHERE email = ${session.user.email} AND password = ${currentPassword}
+      SELECT id, password FROM admin_users 
+      WHERE email = ${session.user.email}
     `;
 
     if (userRes.length === 0) {
+      return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 });
+    }
+
+    const user = userRes[0];
+    const isCorrect = await comparePasswords(currentPassword, user.password);
+
+    if (!isCorrect) {
       return NextResponse.json({ error: 'Contraseña actual incorrecta' }, { status: 400 });
     }
+
+    // Hash de la nueva contraseña
+    const hashedNewPassword = await hashPassword(newPassword);
 
     // Actualizar contraseña
     await sql`
       UPDATE admin_users 
-      SET password = ${newPassword} 
+      SET password = ${hashedNewPassword} 
       WHERE email = ${session.user.email}
     `;
 

@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import BlogForm from '@/components/elite/BlogForm';
+import AppointmentForm from '@/components/elite/AppointmentForm';
 import Image from "next/image";
 
 // Types
@@ -82,6 +83,9 @@ export default function UnifiedAdminDashboard() {
   const [isBlogFormOpen, setIsBlogFormOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | undefined>(undefined);
   
+  // Appointment State
+  const [isAppointmentFormOpen, setIsAppointmentFormOpen] = useState(false);
+  
   // CRM State
   const [leads, setLeads] = useState<Lead[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -121,9 +125,17 @@ export default function UnifiedAdminDashboard() {
 
       const apptRes = await fetch('/api/appointments');
       const apptData = await apptRes.json();
-      setAppointments(Array.isArray(apptData) ? apptData : []);
+      
+      // Normalizar fechas para asegurar formato YYYY-MM-DD para el calendario
+      const normalizedAppts = Array.isArray(apptData) ? apptData.map(a => ({
+        ...a,
+        appointment_date: a.appointment_date?.split('T')[0] || a.appointment_date
+      })) : [];
+      
+      setAppointments(normalizedAppts);
     } catch (err) {
       console.error("CRM fetch error:", err);
+      setError("Error al cargar datos del CRM. Revisa la consola.");
     } finally {
       setCrmLoading(false);
     }
@@ -246,6 +258,15 @@ export default function UnifiedAdminDashboard() {
                  Nuevo Post
                </button>
             )}
+            {activeTab === 'agenda' && (
+               <button 
+                 onClick={() => setIsAppointmentFormOpen(true)}
+                 className="h-10 px-6 bg-accent-blue text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/20 active:scale-95 flex items-center gap-2"
+               >
+                 <Calendar size={14} />
+                 Nueva Cita
+               </button>
+            )}
           </div>
         </header>
 
@@ -287,6 +308,13 @@ export default function UnifiedAdminDashboard() {
           post={editingPost} 
           onClose={() => setIsBlogFormOpen(false)} 
           onSuccess={fetchBlogData} 
+        />
+      )}
+      {isAppointmentFormOpen && (
+        <AppointmentForm 
+          leads={leads}
+          onClose={() => setIsAppointmentFormOpen(false)}
+          onSuccess={fetchCRMData}
         />
       )}
     </div>

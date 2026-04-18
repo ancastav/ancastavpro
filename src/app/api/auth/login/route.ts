@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { encrypt } from '@/lib/auth';
+import { encrypt, comparePasswords } from '@/lib/auth';
 import { cookies } from 'next/headers';
 import { getSql } from '@/lib/db';
 
@@ -13,30 +13,36 @@ export async function POST(req: NextRequest) {
     }
 
     const userRes = await sql`
-      SELECT id, email, name FROM admin_users 
-      WHERE email = ${email} AND password = ${password}
+      SELECT id, email, name, password FROM admin_users 
+      WHERE email = ${email}
       LIMIT 1
     `;
 
     if (userRes.length > 0) {
       const user = userRes[0];
-      const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 horas
-      const session = await encrypt({ user, expires });
+      const isCorrect = await comparePasswords(password, user.password);
+      
+      if (isCorrect) {
+        delete user.password;
+        const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 horas
+        const session = await encrypt({ user, expires });
 
-      const cookieStore = await cookies();
-      cookieStore.set("session", session, { 
-        expires, 
-        httpOnly: true, 
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/'
-      });
+        const cookieStore = await cookies();
+        cookieStore.set("session", session, { 
+          expires, 
+          httpOnly: true, 
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          path: '/'
+        });
 
-      return NextResponse.json({ success: true, user });
+        return NextResponse.json({ success: true, user });
+      }
     }
 
     return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
   } catch (error) {
+    console.error('Login error:', error);
     return NextResponse.json({ error: 'Error interno' }, { status: 500 });
   }
 }

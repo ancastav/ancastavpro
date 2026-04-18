@@ -1,16 +1,11 @@
-import { neon } from '@neondatabase/serverless';
+import { getSql } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
-
-const getSql = () => {
-  const url = process.env.DATABASE_URL;
-  if (!url) {
-    console.warn('DATABASE_URL is not defined');
-    return null;
-  }
-  return neon(url);
-};
+import { requireSession } from '@/lib/require-auth';
 
 export async function POST(req: NextRequest) {
+  const auth = await requireSession();
+  if (!auth.authorized) return auth.response;
+
   try {
     const sql = getSql();
     if (!sql) throw new Error('Database connection failed: missing URL');
@@ -31,12 +26,22 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
+  const auth = await requireSession();
+  if (!auth.authorized) return auth.response;
+
   try {
     const sql = getSql();
     if (!sql) throw new Error('Database connection failed: missing URL');
 
     const appointments = await sql`
-      SELECT a.*, l.full_name as lead_name 
+      SELECT 
+        a.id, 
+        a.lead_id, 
+        TO_CHAR(a.appointment_date, 'YYYY-MM-DD') as appointment_date, 
+        a.appointment_time, 
+        a.notes, 
+        a.status,
+        l.full_name as lead_name 
       FROM appointments a
       JOIN landing_leads l ON a.lead_id = l.id
       ORDER BY a.appointment_date ASC, a.appointment_time ASC

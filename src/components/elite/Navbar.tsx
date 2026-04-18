@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, t }) => {
       </div>
       
       <div className="hidden lg:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-black">
-        <a href="#solutions" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</a>
+        <Link href="/soluciones" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.solutions}</Link>
         <a href="#pricing" className="text-slate-400 hover:text-accent-blue transition-all duration-300">{t.nav.pricing}</a>
         <button 
           onClick={() => window.dispatchEvent(new CustomEvent('open-diagnostic'))}

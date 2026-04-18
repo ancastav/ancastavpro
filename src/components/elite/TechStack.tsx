@@ -13,7 +13,7 @@ export const TechStack: React.FC<TechStackProps> = ({ lang }) => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-baseline justify-between mb-16 gap-4">
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter">
-            {t.title.split(' ').map((word, i) => (
+            {t.title.split(' ').map((word: any, i: number) => (
               <React.Fragment key={i}>
                 {i > 0 ? <span className="text-accent-blue">{word} </span> : <span>{word} </span>}
               </React.Fragment>
@@ -25,7 +25,7 @@ export const TechStack: React.FC<TechStackProps> = ({ lang }) => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {t.technologies.map((tech, index) => (
+          {t.technologies.map((tech: any, index: number) => (
             <div 
               key={tech.name}
               className="group p-8 rounded-2xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 hover:border-accent-blue/20 transition-all duration-500 flex flex-col"

@@ -381,6 +381,44 @@ export const translations = {
         dev: 'Desarrollo',
         security: 'Seguridad'
       }
+    },
+    solutions_page: {
+      hero: {
+        badge: 'PORTAFOLIO // ESTRATÉGICO',
+        title: 'Soluciones',
+        description: 'Potenciamos tu visión empresarial con arquitectura digital de alto rendimiento y consultoría especializada.'
+      },
+      items: [
+        {
+          title: 'Asesoría Digital',
+          description: 'Estrategia integral para dominar el mercado digital actual y maximizar tu presencia online.',
+          icon: '🌐'
+        },
+        {
+          title: 'Asesoría TICs',
+          description: 'Optimización tecnológica y sistemas de información avanzados para una operatividad sin fisuras.',
+          icon: '💻'
+        },
+        {
+          title: 'Diseño y Elaboración de Sitios Web',
+          description: 'Presencia online de alto impacto con arquitectura orientada a la conversión y branding de élite.',
+          icon: '🎨'
+        },
+        {
+          title: 'Asesoría Empresarial',
+          description: 'Consultoría estratégica personalizada para el crecimiento, escalabilidad y estabilidad de tu negocio.',
+          icon: '💼'
+        },
+        {
+          title: 'Constitución de Empresas',
+          description: 'Asistencia y seguimiento experto en todo el proceso de formalización de tu nueva entidad jurídica.',
+          icon: '⚖️'
+        }
+      ],
+      cta: {
+        whatsapp: 'Contactar vía WhatsApp',
+        appointment: 'Solicitar Cita Estratégica'
+      }
     }
   },
   en: {
@@ -762,6 +800,44 @@ export const translations = {
         ai: 'Artificial Intelligence',
         dev: 'Development',
         security: 'Security'
+      }
+    },
+    solutions_page: {
+      hero: {
+        badge: 'PORTFOLIO // STRATEGIC',
+        title: 'Solutions',
+        description: 'Powering your business vision with high-performance digital architecture and specialized consulting.'
+      },
+      items: [
+        {
+          title: 'Digital Consulting',
+          description: 'Comprehensive strategy to dominate today\'s digital market and maximize your online presence.',
+          icon: '🌐'
+        },
+        {
+          title: 'ICT Consulting',
+          description: 'Technological optimization and advanced information systems for seamless operations.',
+          icon: '💻'
+        },
+        {
+          title: 'Web Design & Development',
+          description: 'High-impact online presence with conversion-oriented architecture and elite branding.',
+          icon: '🎨'
+        },
+        {
+          title: 'Business Consulting',
+          description: 'Personalized strategic consulting for your business\'s growth, scalability, and stability.',
+          icon: '💼'
+        },
+        {
+          title: 'Company Incorporation',
+          description: 'Expert assistance and follow-up throughout the formalization process of your new legal entity.',
+          icon: '⚖️'
+        }
+      ],
+      cta: {
+        whatsapp: 'Contact via WhatsApp',
+        appointment: 'Request Strategic Meeting'
       }
     }
   }

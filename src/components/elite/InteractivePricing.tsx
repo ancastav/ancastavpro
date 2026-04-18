@@ -48,7 +48,7 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang, t 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter">
-            {t.title.split(' ').map((word, i) => (
+            {t.title.split(' ').map((word: any, i: number) => (
               <React.Fragment key={i}>
                 {i === 2 ? <span className="text-accent-blue">{word} </span> : <span>{word} </span>}
               </React.Fragment>
@@ -60,7 +60,7 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang, t 
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center font-poppins text-slate-900">
-          {plans.map((plan, index) => (
+          {plans.map((plan: any, index: number) => (
             <div 
               key={plan.name}
               className={`relative p-8 rounded-3xl border transition-all duration-500 overflow-hidden group
@@ -90,7 +90,7 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang, t 
               </p>
               
               <ul className="space-y-4 mb-10">
-                {plan.features.map((feature) => (
+                {plan.features.map((feature: any) => (
                   <li key={feature} className="flex items-center gap-3 text-sm text-slate-600 group-hover:text-slate-900 transition-colors">
                     <svg className="w-4 h-4 text-accent-blue shrink-0 font-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -102,7 +102,7 @@ export const InteractivePricing: React.FC<InteractivePricingProps> = ({ lang, t 
               
               <ClientTrigger 
                 event="open-contact"
-                className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 cursor-pointer
+                className={`w-full py-4 px-6 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 cursor-pointer flex items-center justify-center text-center
                   ${plan.featured 
                     ? 'bg-accent-blue text-white hover:bg-slate-900 hover:scale-[1.02] shadow-lg shadow-blue-500/20' 
                     : 'bg-slate-100 text-slate-900 hover:bg-slate-200 hover:scale-[1.02]'}`}

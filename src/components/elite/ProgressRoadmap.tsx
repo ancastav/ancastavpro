@@ -12,7 +12,7 @@ export const ProgressRoadmap: React.FC<ProgressRoadmapProps> = ({ lang }) => {
     <section className="py-24 px-6 bg-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-poppins font-black text-slate-900 mb-16 text-center uppercase tracking-tighter">
-          {t.title.split(' ').map((word, i, arr) => (
+          {t.title.split(' ').map((word: any, i: number, arr: any[]) => (
             <React.Fragment key={i}>
               {i === arr.length - 1 ? <span className="text-accent-blue">{word} </span> : <span>{word} </span>}
             </React.Fragment>
@@ -20,7 +20,7 @@ export const ProgressRoadmap: React.FC<ProgressRoadmapProps> = ({ lang }) => {
         </h2>
         
         <div className="flex flex-col gap-12 relative before:absolute before:left-4 md:before:left-1/2 before:w-[1px] before:h-full before:bg-slate-100">
-          {t.steps.map((step, index) => (
+          {t.steps.map((step: any, index: number) => (
             <div 
               key={step.id} 
               className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}

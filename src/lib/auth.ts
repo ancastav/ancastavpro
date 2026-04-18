@@ -2,14 +2,24 @@ import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { getSql } from './db';
+import bcrypt from 'bcryptjs';
 
 interface SessionPayload extends JWTPayload {
   user: { email: string; id: string };
   expires: Date;
 }
 
-const secretKey = "elite_ancastav_secret_key_change_me_in_prod";
+const secretKey = process.env.AUTH_SECRET || "elite_ancastav_secret_key_change_me_in_prod";
 const key = new TextEncoder().encode(secretKey);
+
+export async function hashPassword(password: string) {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+}
+
+export async function comparePasswords(password: string, hash: string) {
+  return await bcrypt.compare(password, hash);
+}
 
 export async function encrypt(payload: JWTPayload) {
   return await new SignJWT(payload)
@@ -34,14 +44,20 @@ export async function login(formData: FormData) {
   if (!sql) return null;
 
   const userRes = await sql`
-    SELECT id, email, name FROM admin_users 
-    WHERE email = ${email} AND password = ${password}
+    SELECT id, email, name, password FROM admin_users 
+    WHERE email = ${email}
     LIMIT 1
   `;
 
   if (userRes.length === 0) return null;
   
   const user = userRes[0];
+  const isCorrect = await comparePasswords(password, user.password);
+  
+  if (!isCorrect) return null;
+
+  // No devolver el password al resto del app
+  delete user.password;
 
   // Crear la sesión
   const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 horas

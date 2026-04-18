@@ -4,9 +4,21 @@ import React from 'react';
 import { Language } from "@/lib/translations";
 import { ClientTrigger } from './ClientTrigger';
 
+interface ServiceItem {
+  tag: string;
+  title: string;
+  description: string;
+}
+
 interface AgenticServicesProps {
   lang: Language;
-  t: any;
+  t: {
+    badge: string;
+    title: string;
+    description: string;
+    items: ServiceItem[];
+    explore: string;
+  };
 }
 
 const serviceIcons = [
@@ -40,7 +52,7 @@ export const AgenticServices: React.FC<AgenticServicesProps> = ({ lang, t }) => 
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.items.map((service: any, index: number) => (
+          {t.items.map((service: { tag: string; title: string; description: string }, index: number) => (
             <ClientTrigger 
               key={index}
               event="open-contact"

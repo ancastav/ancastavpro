@@ -1,17 +1,7 @@
-import { neon } from '@neondatabase/serverless';
+import { getSql } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 import { sendLeadNotification, type Lead } from '@/lib/mail';
-
-const getSql = () => {
-  const url = process.env.DATABASE_URL;
-  if (!url) {
-    console.error('DATABASE_URL is not defined in environment');
-    return null;
-  }
-  // Log URL prefix for debugging while keeping credentials secure
-  console.log(`Using Database: ${url.split('@')[1]?.split('.')[0] || 'Unknown'}`);
-  return neon(url);
-};
+import { requireSession } from '@/lib/require-auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,11 +26,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, lead: result[0] });
   } catch (error: any) {
     console.error('Error al guardar el lead:', error);
-    return NextResponse.json({ error: 'Error interno del servidor', details: error.message }, { status: 500 });
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
 }
 
 export async function GET() {
+  const auth = await requireSession();
+  if (!auth.authorized) return auth.response;
+
   try {
     const sql = getSql();
     if (!sql) throw new Error('Database connection failed: missing URL');
@@ -56,6 +49,9 @@ export async function GET() {
 }
 
 export async function PATCH(req: NextRequest) {
+  const auth = await requireSession();
+  if (!auth.authorized) return auth.response;
+
   try {
     const sql = getSql();
     if (!sql) throw new Error('Database connection failed: missing URL');
